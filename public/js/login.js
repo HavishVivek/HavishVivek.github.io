@@ -1,11 +1,12 @@
 form.addEventListener("submit", () => {
+  console.log("I am in login page")
   const login = {
     email: email.value,
     password: password.value
   }
   fetch("/api/login", {
     method: "POST",
-    body: JSON .stringify(login),
+    body: JSON.stringify(login),
     headers: {
       "content-Type": "application/json"
     }
@@ -17,7 +18,7 @@ form.addEventListener("submit", () => {
           error.innerText = data.error
         }else{
           error.style.display = "none"
-          success.style.dsiplay = "block"
+          success.style.display = "block"
           success.innerText = data.success
         }
       })
