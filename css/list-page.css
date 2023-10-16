@@ -1,0 +1,43 @@
+.container-article{
+  margin: 3em;
+}
+.list-article{
+  display: flex;
+  padding: 2em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background-color: white;
+  -webkit-box-align: start;
+}
+
+.post-image {
+  width: 50%;
+  display: block;
+}
+
+.post-content{
+  width: 50%;
+  display: block;
+}
+
+.heading-article{
+  margin: 0em;
+  padding: 1em;
+  color: #1976d2!important;
+}
+
+.excerpt{
+  padding: 1.5em;
+}
+
+.read-more-button{
+  display: block;
+  width: 30%;
+  padding: 1em;
+  margin-top: 2em;
+  background-color: #ffc107;
+  color: hsla(0,0%,0%,0.6)!important;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+}

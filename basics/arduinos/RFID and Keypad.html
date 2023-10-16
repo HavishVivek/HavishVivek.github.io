@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+    <link rel="stylesheet" href="../../css/global.css" />
+    <link rel="stylesheet" href="../../css/show-page.css" />
+    <link rel="html" href="index.html" />
+  </head>
+  <body>
+    <!-- Content Start-->
+    <div class="show-article">
+      <h2 class="title-article">rfid and keypad door lock system</h2>
+
+      <div class="image-article">
+        <img src="../images/keypad.jpg" alt="testing keypad" />
+      </div>
+
+      <div class="intro-article">
+        <p>
+          A Door lock system that open the door when the passcode and correct
+          the tag is put and the servo move to the open or close depends on if
+          your close or open the door
+        </p>
+      </div>
+      <div class="components-article">
+        <h4>Components</h4>
+
+        <ul>
+          <li>Arduino uno/Arduino mega/Arduino due</li>
+          <li>Keypad(3x4 or 4x4)</li>
+          <li>Rfid/tag/card</li>
+          <li>Jumperwires</li>
+          <li>Usb cable</li>
+          <li>servo(sg90)</li>
+          ,<li>redLed/ greenLED</li>
+        </ul>
+      </div>
+
+      <div class="schematics-article">
+        <h4>Schematics</h4>
+        <div>
+          <img src="../images/keypad.jpg" alt="testing keypad" />
+        </div>
+      </div>
+
+      <div class="description-article">
+        <h4>Description</h4>
+        <p>
+          The keypad has Ultra-thin design and on the back it has an adhesive
+          backing. It can be used for typing a password and also be used for
+          security systems.
+        </p>
+      </div>
+
+      <div class="code-article">
+        <h4>Code</h4>
+        <pre class="pre-code">
+          <code>
+            #include <LiquidCrystal.h> //include LCD library (standard library)
+              #include <Keypad.h> //include keypad library - first you must install library (library link in the video description)
+              
+              #define redLED 10 //define the LED pins
+              #define greenLED 11
+              
+              char* password ="**070177##"; //create a password
+              int pozisyon = 0; //keypad position
+              
+              const byte rows = 4; //number of the keypad's rows and columns
+              const byte cols = 3;
+              
+              char keyMap [rows] [cols] = {
+                {'1', '2', '3'},
+                {'4', '5', '6'},
+                {'7', '8', '9'},
+                {'*', '0', '#'}
+              
+              };
+              
+              
+              byte rowPins [rows] = {9, 8, 7, 6}; //pins of the keypad
+              byte colPins [cols] = {5, 4, 3};
+              
+              Keypad myKeypad = Keypad( makeKeymap(keyMap), rowPins, colPins, rows, cols);
+              
+              LiquidCrystal lcd (A0, A1, A2, A3, A4, A5); // pins of the LCD. (RS, E, D4, D5, D6, D7)
+              
+              void setup(){
+              
+                lcd.begin(16, 2);
+                pinMode(redLED, OUTPUT);  //set the LED as an output
+                pinMode(greenLED, OUTPUT);
+                setLocked (true); //state of the password
+              }
+              
+              void loop(){
+              
+                char whichKey = myKeypad.getKey(); //define which key is pressed with getKey
+              
+                lcd.setCursor(0, 0);
+                lcd.print("    Welcome");
+                lcd.setCursor(0, 1);
+                lcd.print(" Enter Password");
+              
+                // if(whichKey == '*' || whichKey == '#'){
+                //   pozisyon=0;
+                //   setLocked (true);
+                //   lcd.clear();
+                //   lcd.setCursor(0, 0);
+                //   lcd.print("  Invalid Key!");
+                //   delay(1000);
+                //   lcd.clear();
+                // }
+                if(whichKey == password [pozisyon]){
+              
+                  pozisyon ++;
+                }
+                if(pozisyon == 10){
+                  setLocked (false);
+                  lcd.clear();
+                  lcd.setCursor(0, 0);
+                  lcd.print("*** Verified ***");
+                  delay(3000);
+                  lcd.clear();
+                  lcd.setCursor(0, 0);
+                  lcd.print(" entered");
+                  lcd.setCursor(0, 1);
+                  lcd.print("open door");
+                  delay(7000);
+                  lcd.clear();
+                }
+              
+                delay(100);
+              }
+              
+              void setLocked(int locked){
+                if(locked){
+                  digitalWrite(redLED, HIGH);
+                  digitalWrite(greenLED, LOW);
+                  }
+                  else{
+                    digitalWrite(redLED, LOW);
+                    digitalWrite(greenLED, HIGH);
+                  }
+                }
+              
+          </code>
+        </pre>
+      </div>
+      <div class="conclusion-article">
+        <h4>Conclusion</h4>
+        <p></p>
+      </div>
+    </div>
+    <!-- Content End-->
+  </body>
+</html>
