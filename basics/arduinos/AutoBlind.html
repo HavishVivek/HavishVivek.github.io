@@ -1,119 +1,198 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>test</title>
-    <link rel="stylesheet" href="../../css/global.css" />
-    <link rel="stylesheet" href="../../css/show-page.css" />
-    <link rel="html" href="index.html" />
-  </head>
   <body>
-    <!-- NAVBAR Start-->
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <title>Nav</title>
-        <link rel="stylesheet" href="css/style.css" />
-      </head>
-      <body>
-        <nav>
-          <p>Project-lab</p>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>
-              <a href="basics/arduino.html">Electronics</a>
-              <ul>
-                <li><a href="">Arduino</a></li>
-                <li><a href="">Raspberrypi</a></li>
-              </ul>
-            </li>
-            <li><a href="basics/AlexaSkill.html">AlexaSkill</a></li>
-            <li><a href="basics/Tenserflow.html">Ai</a></li>
-            <li><a href="basics/Github.html">Github</a></li>
-          </ul>
-        </nav>
-      </body>
-    </html>
-
-    <!-- NAVBAR End-->
-
-    <!-- Content Start-->
-    <div class="show-article">
-      <h2 class="title-article">rfid and keypad door lock system</h2>
-
-      <div class="image-article">
-        <img src="../images/keypad.jpg" alt="testing keypad" />
-      </div>
-
-      <div class="intro-article">
-        <p>
-          A Door lock system that open the door when the passcode and correct
-          the tag is put and the servo move to the open or close depends on if
-          your close or open the door
-        </p>
-      </div>
-      <div class="components-article">
-        <h4>Components</h4>
-
-        <ul>
-          <li>Arduino uno/Arduino mega/Arduino due</li>
-          <li>Keypad</li>
-          <li>Rfid/tag/card</li>
-          <li>Jumperwires</li>
-          <li>Usb cable</li>
-          <li>servo(sg90)</li>
-        </ul>
-      </div>
-
-      <div class="schematics-article">
-        <h4>Schematics</h4>
-        <div>
-          <img src="../images/keypad.jpg" alt="testing keypad" />
+    <link rel="stylesheet" href="/css/NavBar.css" />
+    <link rel="stylesheet" href="/css/project.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/tab.css">
+    <link rel="stylesheet" href="/css/arduino.css">
+    <div class="navbar">
+      <div class="dropdown">
+        <button class="dropbtn">
+          Home
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="index.html">Home</a>
+          <a href="basics/Github.html">Reference</a>
         </div>
       </div>
-
-      <div class="description-article">
-        <h4>Description</h4>
-        <p>
-          The keypad has Ultra-thin design and on the back it has an adhesive
-          backing. It can be used for typing a password and also be used for
-          security systems.
-        </p>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Electronics
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../arduino.html">Arduino</a>
+          <a href="basics/raspberry.html">Raspberrypi</a>
+          <a href="basics/esp32.html">Esp32</a>
+        </div>
       </div>
-
-      <div class="code-article">
-        <h4>Code</h4>
-        <pre class="pre-code">
-          <code>
-  #include Keypad.h
-  const byte ROWS = 4; 
-  const byte COLS = 4; 
-  char hexaKeys[ROWS][COLS] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', 'C'},
-    {'*', '0', '#', 'D'}
-  };
-  byte rowPins[ROWS] = {9, 8, 7, 6}; 
-  byte colPins[COLS] = {5, 4, 3, 2}; 
-  Keypad customKeypad = Keypad(makeKeymap(hexaKeys), 
-                               rowPins, colPins, ROWS, COLS); 
-  void setup(){
-    Serial.begin(9600);
-  }
-  void loop(){
-    char customKey = customKeypad.getKey();
-    if (customKey){
-      Serial.println(customKey);
-    }
-  }</code>
-        </pre>
-      </div>
-      <div class="conclusion-article">
-        <h4>Conclusion</h4>
-        <p></p>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Basic Electronics
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="basics/555Timer.html">555 timer</a>
+        </div>
       </div>
     </div>
-    <!-- Content End-->
+    <div class="banner">
+      <img src="../poroject_title_Image/Auto Blind.png" alt="Banner Image">
+      <div class="text">
+          <h1>Auto Blinds</h1>
+      </div>
+  </div>
+    <h1>INTRO</h1>
+    <p>The blinds can be opened and closed using a remote control with three modes. The remote control sends a signal to the IR receiver. The available modes are 50%, 70%, and 100%.</p>
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Parts')">Parts</button>
+    <button class="tablinks" onclick="openCity(event, 'schematic')">schematic</button>
+    <button class="tablinks" onclick="openCity(event, 'circuit')">Circuit</button>
+    <button class="tablinks" onclick="openCity(event, 'code')">code</button>
+    <button class="tablinks" onclick="openCity(event, 'codes')">code Explain</button>
+  </div>
+  
+  <div id="Parts" class="tabcontent">
+       <!-- Arduino board -->
+       <div class="row align-items-center" style="padding:20px;border-top: 1px #cecece solid;">
+        <div class="col-sm-1">
+          <p>1</p>
+        </div>
+        <div class="col-sm-4">
+          <img class="imgBuy" src="../projectImage/Arduino.png">
+        </div>
+        <div class="col-sm-6">
+          <h3>Arduino</h3><br>
+          <p>The Arduino helps drive the motor and use the IR receiver with a remote</p>
+        </div>
+        <div class="col-sm-1">
+          <a class="buyButton" target="_blank" href="https://amzn.to/2YgIwmR"><i class="icon-cart"></i></a>
+        </div>
+      </div>
+      <!-- Stepper motor -->
+      <div class="row align-items-center" style="padding:20px;border-top: 1px #cecece solid;">
+        <div class="col-sm-1">
+          <p>2</p>
+        </div>
+        <div class="col-sm-4">
+          <img class="imgBuy" src="../projectImage/stepperMotor.png">
+        </div>
+        <div class="col-sm-6">
+          <h3>Stepper motor</h3><br>
+          <p>The  stepper motor rotates the string of blind</p>
+        </div>
+        <div class="col-sm-1">
+          <a class="buyButton" target="_blank" href="https://amzn.to/2YnM32H"><i class="icon-cart"></i></a>
+        </div>
+      </div>
+      <!-- Stepper motor driver-->
+      <div class="row align-items-center" style="padding:20px;border-top: 1px #cecece solid;">
+        <div class="col-sm-1">
+          <p>3</p>
+        </div>
+        <div class="col-sm-4">
+          <img class="imgBuy" src="../projectImage/steeper motor driver.png">
+        </div>
+        <div class="col-sm-6">
+          <h3>Stepper motor driver</h3><br>
+          <p>The stepper motor driver helps the Arduino to drive the stepper motor</p>
+        </div>
+        <div class="col-sm-1">
+          <a class="buyButton" target="_blank" href="https://amzn.to/33LvkHz"><i class="icon-cart"></i></a>
+        </div>
+      </div>
+      <!-- Ir reciver and remote -->
+      <div class="row align-items-center" style="padding:20px;border-top: 1px #cecece solid;">
+        <div class="col-sm-1">
+          <p>4</p>
+        </div>
+        <div class="col-sm-4">
+          <img class="imgBuy" src="../projectImage/Ir reciver remote.png">
+        </div>
+        <div class="col-sm-6">
+          <h3>Ir receiver and remote</h3><br>
+          <p>The ir receiver will drive the stepper motor to the appropriate blind closing position when the remote is pressed</p>
+        </div>
+        <div class="col-sm-1">
+          <a class="buyButton" target="_blank" href="https://www.amazon.com/ACEIRMC-Infrared-Control-Receiver-arduino/dp/B0C3TWV5BJ/ref=sr_1_8?crid=1OEWWY9XOH15&keywords=ir+remote+receiver+arduino&qid=1698148954&sprefix=ir+receiver+and+remote+%2Caps%2C153&sr=8-8"><i class="icon-cart"></i></a>
+        </div>
+      </div>
+  </div>
+  
+  <div id="schematic" class="tabcontent">
+      <div class="col-md-6 col-md-push-6">
+        <img style="width:100%;height:auto" src="../old_images/active_buzzer.jpg">
+      </div>
+      <div class="col-md-6 col-md-pull-6">
+        <h2>Schematics</h2>
+        <p>Below I list exactly how to hookup your Arduino Board with the parts listed:</p>
+
+        <h3 style="color:#777" class="uppercase">1. Ir receiver</h3>
+        <p>The IR receiver has 3 pins. Vcc to 5v. GND  to ground of Arduino. signal pin to pin 7 of Arduino pin.</p>
+
+        <h3 style="color:#777" class="uppercase">2. stepper motor </h3>
+        <p>connect the stepper motor to the stepper motor driver</p>
+
+        <h3 style="color:#777" class="uppercase">3. stepper motor driver</h3>
+        <p>The stepper motor driver has many pins. Vcc to 5v. GND to  ground of Arduino. IN1 to pin 8 of Arduino board. IN2 to pin 9 of Arduino board. IN3 to pin 10 of tArduino board. IN4 to 11</p>
+      </div>
+  </div>
+  
+  <div id="code" class="tabcontent">
+    <div class="content">
+      <pre class="arduino-code">
+          <code>
+            #include <"IRremote.hpp">
+            #include <"Stepper.h">
+              
+            const int IR_RECEIVE_PIN = 7;
+            int greenPin = 12;
+              
+            int motorSpeed = 10;
+            Stepper myStepper(2048, 8, 10, 9, 11);
+              
+            void setup()
+            {
+              myStepper.setSpeed(motorSpeed);
+              Serial.begin(9600);
+              IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
+              pinMode(greenPin, OUTPUT);
+            }
+              
+            void loop()
+            {
+              if (IrReceiver.decode())
+              {
+                Serial.println(IrReceiver.decodedIRData.decodedRawData, HEX);
+                IrReceiver.printIRResultShort(&Serial);
+                switch (IrReceiver.decodedIRData.decodedRawData)
+                {
+                case 0xE718FF00:
+                  Serial.println("2");
+                  myStepper.step(2048);
+                  digitalWrite(greenPin, HIGH);
+                  delay(2000);
+                }
+                switch (IrReceiver.decodedIRData.decodedRawData)
+                {
+                  case 0xF30CFF00:
+                    Serial.println("1");
+                    myStepper.step(-2049);
+                    digitalWrite(greenPin, LOW);
+                    delay(2000);
+                }
+                IrReceiver.resume();
+              }
+            }
+          </code>
+      </pre>
+  </div>
+
+  </div>
+  
+  <script src="/javascript/tab.js"></script>
+     
   </body>
 </html>

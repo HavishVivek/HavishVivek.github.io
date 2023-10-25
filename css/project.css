@@ -1,0 +1,66 @@
+.imgBuy {
+  width: 150px;
+  height: auto;
+  border-radius: 10%;
+  padding: 8px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+  color: #000;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+.text {
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  /* Ensure the image doesn't overflow the container */
+}
+
+/* Define CSS for the banner image */
+.banner img {
+  width: 100%;
+  height: auto;
+}
+
+/* Define CSS for the text overlay */
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff;
+  /* Text color */
+}
+
+.text h1 {
+  font-size: 36px;
+  background: #888;
+  /* Grey background color */
+  padding: 10px;
+  /* Adjust as needed for spacing */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+.text p {
+  font-size: 18px;
+}

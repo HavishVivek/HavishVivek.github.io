@@ -1,0 +1,36 @@
+.arduino-code {
+  background-color: #f4f4f4;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.arduino-code code {
+  display: block;
+  white-space: pre;
+  font-family: 'Courier New', Courier, monospace;
+  color: #333;
+}
+
+.arduino-code code::before,
+.arduino-code code::after {
+  content: '\00A0';
+  /* Add some space before and after the code block */
+}
+
+.arduino-code code::before {
+  display: block;
+  font-size: 18px;
+  color: #007acc;
+  /* Set the color for the line numbers */
+  counter-reset: line;
+  /* Reset the line counter */
+}
+
+.arduino-code code>span::before {
+  content: counter(line);
+  counter-increment: line;
+  padding-right: 10px;
+  color: #007acc;
+}
