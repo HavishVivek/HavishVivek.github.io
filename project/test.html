@@ -1,58 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Scroll-triggered Counter</title>
-    <link rel="stylesheet" type="text/css" href="/css/test.css">
-    
-</head>
-<body>
-    <div class="container">
-        <h1><span id="counter">0</span></h1>
-        <h1> PARTS NEEDED </h1>
-        <h1><span id="counter">0</span></h1>
-        <h1> Line of code</h1>
-        <h1><span id="counter">0</span></h1>
-        <h1> TIME TIL COMPLETION (MIN) </h1>
-    </div>
-    <script src="/javascript/counter.js"></script>
-</body>
-</html>
+<link rel="stylesheet" href="/dist/output.css" />
+<button
+  id="dropdownDefaultButton"
+  data-dropdown-toggle="dropdown"
+  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  type="button"
+>
+  Dropdown button
+  <svg
+    class="w-2.5 h-2.5 ml-2.5"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m1 1 4 4 4-4"
+    />
+  </svg>
+</button>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Open New Page</title>
-</head>
-<body>
-    <button id="openPageButton">Build</button>
-
-    <script>
-        document.getElementById("openPageButton").addEventListener("click", function() {
-            // Open a new page when the button is clicked
-            window.open("https://www.example.com", "_blank");
-        });
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
-</head>
-<body>
-    <div id="topics-container">
-        <div class="topic" id="topic-1">Topic 1</div>
-        <div class="topic" id="topic-2">Topic 2</div>
-        <div class="topic" id="topic-3">Topic 3</div>
-        <!-- Add more topics as needed -->
-    </div>
-
-    <a href="#" id="image-link">
-        <img src="/basics/bannerImg/Arduino.jpeg" alt="Click Me">
-    </a>
-
-    <script src="/javascript/trans.js"></script>
-</body>
-</html>
-
+<!-- Dropdown menu -->
+<div
+  id="dropdown"
+  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+>
+  <ul
+    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+    aria-labelledby="dropdownDefaultButton"
+  >
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >Dashboard</a
+      >
+    </li>
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >Settings</a
+      >
+    </li>
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >Earnings</a
+      >
+    </li>
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >Sign out</a
+      >
+    </li>
+  </ul>
+</div>
