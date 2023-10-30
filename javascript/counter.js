@@ -1,5 +1,5 @@
 let counter = 0;
-let targetNumber = 100; // Replace with your desired target number
+let targetNumber = 4; // Replace with your desired target number
 const speed = 3000;
 const counterElement = document.getElementById("counter");
 const container = document.querySelector(".container");

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/tab.css">
     <link rel="stylesheet" href="/css/arduino.css">
+
     <div class="navbar">
       <div class="dropdown">
         <button class="dropbtn">
@@ -44,6 +45,17 @@
           <h1>Auto Blinds</h1>
       </div>
   </div>
+  <div class="container">
+    <h1><span id="counter">0</span></h1>
+    <h1 class="countingText"> PARTS NEEDED </h1>
+    <h1><span id="counter">0</span></h1>
+    <h1 class="countingText"> Line of code</h1>
+    <h1><span id="counter">0</span></h1>
+    <h1 class="countingText"> TIME TIL COMPLETION (MIN) </h1>
+    <h1><span id ="counter">0</span></h1>
+    <h1 class="countingText"> Cost of project </h1>
+</div>
+<script src="/javascript/counter.js"></script>
     <h1>INTRO</h1>
     <p>The blinds can be opened and closed using a remote control with three modes. The remote control sends a signal to the IR receiver. The available modes are 50%, 70%, and 100%.</p>
   <div class="tab">
@@ -122,8 +134,26 @@
   </div>
   
   <div id="schematic" class="tabcontent">
-      <div class="col-md-6 col-md-push-6">
-        <img style="width:100%;height:auto" src="../old_images/active_buzzer.jpg">
+    <div class="content">
+      <div class="left-column">
+        <h2>Schematics</h2>
+        <p>Below I list exactly how to hookup your Arduino Board with the parts listed:</p>
+
+        <h3 style="color:#777" class="uppercase">1. Ir receiver</h3>
+        <p>The IR receiver has 3 pins. Vcc to 5v. GND  to ground of Arduino. signal pin to pin 7 of Arduino pin.</p>
+
+        <h3 style="color:#777" class="uppercase">2. stepper motor </h3>
+        <p>connect the stepper motor to the stepper motor driver</p>
+
+        <h3 style="color:#777" class="uppercase">3. stepper motor driver</h3>
+        <p>The stepper motor driver has many pins. Vcc to 5v. GND to  ground of Arduino. IN1 to pin 8 of Arduino board. IN2 to pin 9 of Arduino board. IN3 to pin 10 of tArduino board. IN4 to 11</p>
+      </div>
+      <div class="right-column">
+          <img src="../schematic/Blinds.jpg" alt="Your Image">
+      </div>
+  </div>
+      <!-- <div class="col-md-6 col-md-push-6">
+        <img style="width:100%;height:auto" src="../schematic/Blinds.jpg">
       </div>
       <div class="col-md-6 col-md-pull-6">
         <h2>Schematics</h2>
@@ -137,7 +167,7 @@
 
         <h3 style="color:#777" class="uppercase">3. stepper motor driver</h3>
         <p>The stepper motor driver has many pins. Vcc to 5v. GND to  ground of Arduino. IN1 to pin 8 of Arduino board. IN2 to pin 9 of Arduino board. IN3 to pin 10 of tArduino board. IN4 to 11</p>
-      </div>
+      </div> -->
   </div>
   
   <div id="code" class="tabcontent">
