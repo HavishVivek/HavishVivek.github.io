@@ -1,55 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Tailwind CSS Test</title>
     <!-- Include the Tailwind CSS stylesheet -->
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="bg-blue-500 p-4">
-      <h1 class="text-2xl text-white">Hello, Tailwind CSS!</h1>
-    </div>
-
-    <div class="container mx-auto mt-4">
-      <p class="text-gray-800">
-        This is a simple example of using Tailwind CSS.
-      </p>
-      <button
-        class="bg-green-500 text-white font-bold py-2 px-4 rounded-full mt-2 hover:bg-green-600"
-      >
-        Click Me
-      </button>
-    </div>
-    <div class="navbar">
-      <div class="dropdown">
-        <button class="dropbtn">
+    <div class="m-2 overflow-hidden bg-neutral-500 font-sans">
+      <div class="float-left overflow-hidden group">
+        <button
+          class="text-base border-none outline-none bg-neutral-500 p-3.5 bg-inherit hover:bg-ng-sky-700"
+        >
           Home
           <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
-          <a href="../index.html">Home</a>
-          <a href="./Github.html">Reference</a>
+        <div
+          class="hidden absolute bg-slate-100 min-w-160 shadow-md z-auto group-hover:block bg-ng-sky-700"
+        >
+          <a
+            href="/project/index.html"
+            class="block text-base bg-slate-100 text-center p-3.5"
+            >Home</a
+          >
+          <a
+            href="/project/Github.html"
+            class="block text-base bg-slate-100 text-center p-3.5"
+            >Reference</a
+          >
         </div>
       </div>
-      <div class="dropdown">
-        <button class="dropbtn">
+      <div class="float-left overflow-hidden group">
+        <button
+          class="text-base border-none outline-none bg-neutral-500 p-3.5 bg-inherit hover:bg-ng-sky-700"
+        >
           Electronics
           <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
-          <a href="./arduino.html">Arduino</a>
-          <a href="./raspberry.html">Raspberrypi</a>
+        <div
+          class="hidden absolute bg-slate-100 min-w-160 shadow-md z-auto group-hover:block bg-ng-sky-700"
+        >
+          <a
+            href="/project/arduino.html"
+            class="block text-base bg-slate-100 text-center p-3.5"
+            >Arduino</a
+          >
+          <a
+            href="/project/raspberry.html"
+            class="block text-base bg-slate-100 text-center p-3.5"
+            >Raspberrypi</a
+          >
         </div>
       </div>
-      <div class="dropdown">
-        <button class="dropbtn">
+      <div class="float-left overflow-hidden group">
+        <button
+          class="text-base border-none outline-none bg-neutral-500 p-3.5 bg-inherit hover:bg-ng-sky-700"
+        >
           Basic Electronics
           <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
-          <a href="./555Timer.html">555 timer</a>
+        <div
+          class="hidden absolute bg-slate-100 min-w-160 shadow-md z-auto group-hover:block bg-ng-sky-700"
+        >
+          <a
+            href="/project/555Timer.html"
+            class="block text-base bg-slate-100 text-center p-3.5"
+            >555 timer</a
+          >
         </div>
       </div>
     </div>
