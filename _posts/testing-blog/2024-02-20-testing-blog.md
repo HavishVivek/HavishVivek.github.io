@@ -77,3 +77,40 @@ function copyText() {
     alert("Text copied to clipboard!");
 }
 </script>
+
+<style>
+  .container {
+    position: relative;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+</style>
+
+<div class="container">
+    <textarea placeholder=eval "$(/opt/homebrew/bin/brew shellenv)"></textarea>
+    <button onclick="copyText()">Copy Text</button>
+</div>
+
+<script>
+function copyText() {
+    var textToCopy = document.querySelector("textarea");
+    textToCopy.select();
+    document.execCommand("copy");
+    alert("Text copied to clipboard!");
+}
+</script>
+
+_installing arduino-cli
+
+To istall,run
+
+
