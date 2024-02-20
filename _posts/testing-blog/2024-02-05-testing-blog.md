@@ -1,5 +1,7 @@
 ---
 layout: post
 title: Auto Blinds
-tags: [Arduino, circuits, C++]
+tags: ;fdfjd;sfdfjrduino, circuits, C++
 ---
+
+iddklfkld;fsdf;dsfsdfkdsf
