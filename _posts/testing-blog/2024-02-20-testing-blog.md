@@ -109,8 +109,6 @@ function copyText() {
 }
 </script>
 
-_installing arduino-cli
+\_installing arduino-cli
 
-To istall,run
-
-
+To install,run
