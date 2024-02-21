@@ -13,7 +13,7 @@ mode: dark # default theme "dark" | "light"
 author:
   name: Havish Vivek # author name
   bio: >- # tell to the world
-    I am a Eletrical enginer. I like to make projects with Arduino Raspberrypi and esp32. Here you can find many of project that I have built.
+    I am a Eletrical, Electronics, and Computer enginer. I like to make projects with Arduino Raspberrypi and Esp32. Here you can find many of the project that I have built.
   username: username # general username
   github: github_username # github username
   twitter: twitter_username # twitter username
