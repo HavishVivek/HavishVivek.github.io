@@ -12,103 +12,83 @@ _Installing Homebrew_
 Open up a terminal window and install homebrew with the following
 command:
 
-<style>
-  .container {
-    position: relative;
-  }
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+.copy-link {
+  --height: 36px;
 
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
+display: flex;
+max-width: 250px;
+}
 
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.copy-link-input {
+flex-grow: 1;
+padding: 0 8px;
+font-size: 14px;
+border: 1px solid #cccccc;
+border-right: none;
+outline: none;
+}
+
+.copy-link-input:hover {
+background: #eeeeee;
+}
+
+.copy-link-button {
+flex-shrink: 0;
+width: var(--height);
+height: var(--height);
+display: flex;
+align-items: center;
+justify-content: center;
+background: #dddddd;
+color: #333333;
+outline: none;
+border: 1px solid #cccccc;
+cursor: pointer;
+}
+
+.copy-link-button:hover {
+background: #cccccc;
+}
 </style>
 
-<div class="container">
-    <textarea placeholder='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'></textarea>
-    <button onclick="copyText()">Copy Text</button>
+</head>
+<body>
+ <div class="copy-link">
+ <input type="text" class="copy-link-input" value='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"' readonly>
+  <button type="button" class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
 </div>
-
 <script>
-function copyText() {
-    var textToCopy = document.querySelector("textarea");
-    textToCopy.select();
-    document.execCommand("copy");
-    alert("Text copied to clipboard!");
-}
+document.querySelectorAll(".copy-link").forEach((copyLinkParent) => {
+  const inputField = copyLinkParent.querySelector(".copy-link-input");
+  const copyButton = copyLinkParent.querySelector(".copy-link-button");
+  const text = inputField.value;
+
+inputField.addEventListener("focus", () => inputField.select());
+
+copyButton.addEventListener("click", () => {
+inputField.select();
+navigator.clipboard.writeText(text);
+
+    inputField.value = "Copied!";
+    copyButton.innerHTML = '<span class="material-icons">done</span>';
+
+    setTimeout(() => {
+        inputField.value = text;
+        copyButton.innerHTML = '<span class="material-icons">content_copy</span>';
+    }, 2000);
+
+});
+});
 </script>
 
-_Adding Homwbrew to the path_
-
-After installing, add it to the path(replace "[username]" with your actual username):
-
-<style>
-  .container {
-    position: relative;
-  }
-
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
-
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-</style>
-
-<div class="container">
-    <textarea placeholder='echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/[username]/.zprofile'></textarea>
-    <button onclick="copyText()">Copy Text</button>
-</div>
-
-<script>
-function copyText() {
-    var textToCopy = document.querySelector("textarea");
-    textToCopy.select();
-    document.execCommand("copy");
-    alert("Text copied to clipboard!");
-}
-</script>
-
-<style>
-  .container {
-    position: relative;
-  }
-
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
-
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-</style>
-
-<div class="container">
-    <textarea placeholder=eval "$(/opt/homebrew/bin/brew shellenv)"></textarea>
-    <button onclick="copyText()">Copy Text</button>
-</div>
-
-<script>
-function copyText() {
-    var textToCopy = document.querySelector("textarea");
-    textToCopy.select();
-    document.execCommand("copy");
-    alert("Text copied to clipboard!");
-}
-</script>
-
-\_installing arduino-cli
-
-To install,run
+</body>
+</html>
