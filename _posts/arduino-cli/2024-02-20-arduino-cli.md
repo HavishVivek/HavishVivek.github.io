@@ -354,3 +354,83 @@ To install, run
 </html>
 
 to check arduino-cli is installed, run
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .copy-link {
+            --height: 36px;
+            display: flex;
+            max-width: 250px;
+        }
+
+        .copy-link-input {
+            flex-grow: 1;
+            padding: 0 8px;
+            font-size: 14px;
+            border: 1px solid #cccccc;
+            border-right: none;
+            outline: none;
+        }
+
+        .copy-link-input:hover {
+            background: #eeeeee;
+        }
+
+        .copy-link-button {
+            flex-shrink: 0;
+            width: var(--height);
+            height: var(--height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dddddd;
+            color: #333333;
+            outline: none;
+            border: 1px solid #cccccc;
+            cursor: pointer;
+        }
+
+        .copy-link-button:hover {
+            background: #cccccc;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="copy-link">
+        <input type="text" class="copy-link-input" value="arduino-cli -h" readonly>
+        <button type="button" class="copy-link-button">
+            <span class="material-icons">content_copy</span>
+        </button>
+    </div>
+    <script>
+        document.querySelectorAll(".copy-link").forEach((copyLinkParent) => {
+            const inputField = copyLinkParent.querySelector(".copy-link-input");
+            const copyButton = copyLinkParent.querySelector(".copy-link-button");
+            let text = inputField.value;
+
+            inputField.addEventListener("focus", () => inputField.select());
+
+            copyButton.addEventListener("click", () => {
+                navigator.clipboard.writeText(text).then(() => {
+                    inputField.value = "Copied!";
+                    copyButton.innerHTML = '<span class="material-icons">done</span>';
+
+                    setTimeout(() => {
+                        inputField.value = text;
+                        copyButton.innerHTML = '<span class="material-icons">content_copy</span>';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
