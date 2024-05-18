@@ -1,5 +1,5 @@
 ---
-layout: postssss
+layout: post
 title: Arduino-cli
 tags: Homebrew cli, Terminal
 ---
