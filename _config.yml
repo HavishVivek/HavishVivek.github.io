@@ -36,6 +36,8 @@ collections:
     output: true
   posts_raspberry:
     output: true
+  posts_esp32:
+    output: true
 
 # Markdown settings
 markdown: kramdown
