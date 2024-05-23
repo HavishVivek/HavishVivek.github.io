@@ -32,6 +32,10 @@ fb_appid:
 collections:
   posts:
     output: true
+  posts_arduino:
+    output: true
+  posts_raspberry:
+    output: true
 
 # Markdown settings
 markdown: kramdown
