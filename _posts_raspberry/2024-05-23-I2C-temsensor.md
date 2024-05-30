@@ -30,4 +30,8 @@ I Was building a project that turn on a fan at a centen temperature. I learned a
 1. The rgb is connected to 1k ohms resistor and red is connected to pin 13, green to pin 19, and blue to pin 26
 2. Pin 1 of temp sensor is connected to vcc Pin 2 to GND Pin 3 to scl Pin 4 to sda
 
-**Code**
+**Code:**
+
+Here is the code for the temp sensor and rgb control.:
+
+[temperature](https://github.com/HavishVivek/projectLab/tree/raspberrypi/Component/lesson%20B-15)

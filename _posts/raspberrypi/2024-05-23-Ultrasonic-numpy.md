@@ -26,3 +26,7 @@ I was building a range sensing game. I didn't known how to use Ultrasonic sensor
 4. GND is connected to OE of the ic chip and GND is connected to the gnd of the raspberrypi
 
 **Code:**
+
+Here is the code for the ultrasonic sensor with numpy and rgb led control.:
+
+[ultrasonic](https://github.com/HavishVivek/projectLab/blob/raspberrypi/42Electronics/lesson%20B-14/ultrasonic.py)
