@@ -38,6 +38,10 @@ collections:
     output: true
   posts_esp32:
     output: true
+  post_iot:
+    output: true
+  post_ai_ml:
+    output: true
 
 # Markdown settings
 markdown: kramdown

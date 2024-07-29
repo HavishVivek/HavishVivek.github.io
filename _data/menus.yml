@@ -14,6 +14,14 @@
   url: /raspberry_blog/
   external: false
 
+- title: IOT
+  url: /iot_blog/
+  external: false
+
+- title: AI/ML
+  url: /ai_ml_blog/
+  external: false
+
 # - title: About
 #   url: /about/
 #   external: false # set true if you using external link, see below
