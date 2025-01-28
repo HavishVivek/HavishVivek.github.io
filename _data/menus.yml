@@ -18,14 +18,6 @@
   url: /esp32_blog/
   external: false
 
-- title: IOT
-  url: /iot_blog/
-  external: false
-
-- title: AI/ML
-  url: /ai_ml_blog/
-  external: false
-
 - title: Neural Nexus
   url: ./web_app/template/index.html
   external: false
