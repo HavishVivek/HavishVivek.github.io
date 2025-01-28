@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛸 UFO Appearance Prediction 👽</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-800 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- App Name -->
+            <div class="text-white font-semibold text-2xl">Neural Nexus</div>
+            <div class="space-x-4">
+                <a href="/" class="text-white hover:text-indigo-300">Home</a>
+                <a href="/ai-models" class="text-white hover:text-indigo-300">AI Models</a>
+                <a href="/ml-models" class="text-white hover:text-indigo-300">ML Models</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-3xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-center text-indigo-400 mb-6">Predict UFO Sightings by Country</h1>
+
+        <p class="text-center text-lg text-gray-300 mb-8">Provide the number of seconds, latitude, and longitude of UFO sightings to predict the likely country of the sighting.</p>
+
+        <!-- Form Section -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <form action="{{ url_for('ml_models') }}" method="post">
+                <div class="space-y-6">
+                    <!-- Seconds Input -->
+                    <div class="flex flex-col">
+                        <label for="seconds" class="text-sm font-medium text-gray-400">Seconds</label>
+                        <input type="number" id="seconds" name="seconds" placeholder="Enter seconds" required="required" min="0" max="60" class="mt-1 p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+
+                    <!-- Latitude Input -->
+                    <div class="flex flex-col">
+                        <label for="latitude" class="text-sm font-medium text-gray-400">Latitude</label>
+                        <input type="text" id="latitude" name="latitude" placeholder="Enter latitude" required="required" class="mt-1 p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+
+                    <!-- Longitude Input -->
+                    <div class="flex flex-col">
+                        <label for="longitude" class="text-sm font-medium text-gray-400">Longitude</label>
+                        <input type="text" id="longitude" name="longitude" placeholder="Enter longitude" required="required" class="mt-1 p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-center mt-6">
+                        <button type="submit" class="w-full py-3 px-6 bg-indigo-600 rounded-lg text-white text-lg hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">Predict Country</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Prediction Result -->
+        {% if prediction_text %}
+        <div class="mt-8 bg-gray-700 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-indigo-400 text-center mb-4">Prediction</h2>
+            <p class="text-lg text-center text-gray-300">{{ prediction_text }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
