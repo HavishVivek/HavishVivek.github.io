@@ -15,7 +15,17 @@
   external: false
 
 - title: ESP32
-  url: /esp32_blog/
+  url: /esp32_blog/{%- for menu in menus -%} 
+    {%- if url == menu.url -%}
+      <a class="menu-link active" href="{{ menu.url }}">{{ menu.title }}</a>
+    {%- else -%} 
+      {%- if menu.external -%}
+        <a class="menu-link" href="{{ menu.url }}" target="_blank" rel="noopener">{{ menu.title }}</a>
+      {%- else -%}
+        <a class="menu-link" href="{{ menu.url }}">{{ menu.title }}</a>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
   external: false
 
 - title: IOT
