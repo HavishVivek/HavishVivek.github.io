@@ -26,8 +26,8 @@
   url: /ai_ml_blog/
   external: false
 
-- title: Neural Nexus
-  url: /web_app/template/index.html
+- title: Chat Bot
+  url: ./templates/index.html
   external: false
 
 
