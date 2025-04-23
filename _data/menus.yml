@@ -27,7 +27,7 @@
   external: false
 
 - title: Chat Bot
-  url: ./templates/index.html
+  url: http://192.168.1.238:5001
   external: false
 
 
