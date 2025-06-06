@@ -1,0 +1,78 @@
+---
+layout: post
+title: Connecting Raspberry Pi to the Internet in IoT
+tags: IoT RaspberryPi Electronics
+---
+
+# 🧠 Introduction
+
+In this blog, we explore how to build a simple **IoT-based night-light system** using a Raspberry Pi and the **MQTT** protocol.  
+MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications, especially for transmitting telemetry data like sensor readings or control signals between devices.
+
+We’ll walk through:
+
+1. Understanding MQTT and telemetry  
+2. Hardware setup for the night light  
+3. Code to control the light  
+4. Connecting the Raspberry Pi to an MQTT broker  
+5. Receiving telemetry messages and controlling the light
+
+---
+
+# 🔌 What is MQTT and Telemetry?
+
+**MQTT** is a lightweight, open-source messaging protocol designed for small, low-power devices. It enables **machine-to-machine communication** using a **publish/subscribe** model:
+
+- Devices **publish** data to a central server (**broker**)  
+- Other devices **subscribe** to topics from the broker to receive data  
+
+Because it consumes **minimal bandwidth and power**, MQTT is ideal for IoT systems.
+
+**Telemetry** is the automated collection of data from remote devices or sensors. In IoT, telemetry data (e.g. temperature, motion) is sent to cloud platforms for real-time analysis, monitoring, and decision-making.
+
+Together, **MQTT + Telemetry** allow smart devices to exchange data efficiently in real-time for applications like:
+
+- Smart homes  
+- Industrial automation  
+- AI-driven environments
+
+---
+
+# 🧰 Prerequisites
+
+You'll need:
+
+1. Raspberry Pi with latest Raspberry Pi OS  
+2. [Grove Base Hat for Raspberry Pi](https://www.seeedstudio.com/Grove-Base-Hat-for-Raspberry-Pi.html)  
+3. [Grove - Light Sensor v1.2 (LS06-S Phototransistor)](https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html)  
+4. [Grove - Green LED](https://www.seeedstudio.com/Grove-Green-LED.html)
+
+---
+
+# 🔗 Circuit Connections
+
+- **Grove Green LED → D5**
+- **Grove Light Sensor → A0**
+
+<figure>
+  <img src="../pics/LED.png" alt="LED connected to D5" width="600"/>
+  <figcaption>🔋 Connect the LED to D5</figcaption>
+</figure>
+
+<figure>
+  <img src="../pics/lightSensor.png" alt="Light Sensor connected to A0" width="600"/>
+  <figcaption>🌞 Connect the Light Sensor to A0</figcaption>
+</figure>
+
+---
+
+# 🧪 Setting Up Raspberry Pi for MQTT
+
+## 1️⃣ Create a Python Virtual Environment
+
+Virtual environments help isolate dependencies.
+
+```bash
+sudo apt install python3 python3-venv -y
+python3 -m venv iot-env
+source iot-env/bin/activate

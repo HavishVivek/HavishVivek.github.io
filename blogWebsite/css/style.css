@@ -1,0 +1,163 @@
+/* Basic Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+body {
+  background-color: #0f172a;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Reusable Classes */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  transition: transform 0.5s ease, background 0.5s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.card img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 9999px;
+  margin: 0 auto 1rem;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Input & Button */
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: white;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+button {
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li a {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+li a:hover {
+  color: white;
+}
+
+.arrow {
+  display: inline-block;
+  margin-right: 0.5rem;
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.2s;
+}
+
+li a:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Floating Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+  animation: float 7s ease-in-out 2s infinite;
+}
+
+.animate-float-slower {
+  animation: float 8s ease-in-out 3s infinite;
+}
+
+.animate-float-slowest {
+  animation: float 9s ease-in-out 4s infinite;
+}
