@@ -1,700 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechCrystal Blog - Latest Posts</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechBytes Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle, #1a1a2e, #16213e);
+      color: #fff;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(-45deg, #0f0f23, #1a1a3e, #2d1b69, #0e4b99, #2e8b57);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            min-height: 100vh;
-            color: white;
-        }
+    nav {
+      background: rgba(0, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    nav .logo {
+      font-size: 1.5rem;
+      color: #00ffe1;
+    }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+    nav .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
 
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+    nav .nav-links a:hover {
+      color: #00ffe1;
+    }
 
-        .shape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
+    h1 {
+      text-align: center;
+      color: #00ffe1;
+      margin: 30px 0 20px;
+    }
 
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
 
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 15%;
-            animation-delay: -5s;
-        }
+    .category {
+      background: rgba(0, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 80%;
-            animation-delay: -10s;
-        }
+    .category:hover {
+      background: rgba(0, 255, 255, 0.4);
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(20px) rotate(240deg); }
-        }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 20px 40px;
+    }
 
-        header {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
+    .blog-post {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        nav {
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .blog-post:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            transform: perspective(500px) rotateY(0deg);
-            transition: transform 0.3s ease;
-        }
+    .blog-content {
+      padding: 20px;
+      flex: 2;
+    }
 
-        .logo:hover {
-            transform: perspective(500px) rotateY(15deg) scale(1.05);
-        }
+    .blog-content h2 {
+      color: #00ffe1;
+      margin: 0 0 10px;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
+    .blog-content p {
+      color: #ccc;
+    }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            transform: translateZ(0);
-        }
+    .read-more {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: rgba(0, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+    .read-more:hover {
+      background: rgba(0, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
 
-        main {
-            margin-top: 120px;
-            padding: 20px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .blog-image {
+      flex: 1;
+      max-width: 250px;
+      object-fit: cover;
+    }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+    @media (max-width: 768px) {
+      .blog-post {
+        flex-direction: column;
+      }
 
-        .page-header h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-        }
+      .blog-image {
+        width: 100%;
+        height: auto;
+      }
+    }
 
-        .page-header p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    footer {
+      background: rgba(0, 255, 255, 0.05);
+      padding: 20px;
+      text-align: center;
+      margin-top: auto;
+      box-shadow: 0 -2px 10px rgba(0,255,255,0.2);
+    }
 
-        .filter-section {
-            margin-bottom: 40px;
-            text-align: center;
-        }
+    footer h2 {
+      margin-bottom: 15px;
+      color: #00ffe1;
+    }
 
-        .category-filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    .social-icons a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
 
-        .filter-btn {
-            padding: 10px 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: rgba(0, 212, 170, 0.3);
-            border-color: #00d4aa;
-            color: #00d4aa;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.2);
-        }
-
-        .blog-posts {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .blog-post {
-            display: flex;
-            gap: 30px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            transform: perspective(1000px) rotateX(0deg);
-            position: relative;
-            overflow: hidden;
-            min-height: 250px;
-        }
-
-        .blog-post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .blog-post:hover::before {
-            left: 100%;
-        }
-
-        .blog-post:hover {
-            transform: perspective(1000px) rotateX(2deg) translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        .blog-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .blog-image {
-            width: 300px;
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            flex-shrink: 0;
-            transform: perspective(500px) rotateY(0deg);
-            transition: all 0.3s ease;
-        }
-
-        .blog-image:hover {
-            transform: perspective(500px) rotateY(-5deg) scale(1.02);
-        }
-
-        .blog-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .blog-image:hover img {
-            transform: scale(1.1);
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #00d4aa, #00a8ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        .category-tag {
-            display: inline-block;
-            padding: 5px 15px;
-            background: rgba(0, 212, 170, 0.2);
-            color: #00d4aa;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 212, 170, 0.3);
-        }
-
-        .blog-title {
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 15px;
-            line-height: 1.3;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .blog-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        .read-more {
-            color: #00d4aa;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            transform: translateX(0);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .read-more:hover {
-            transform: translateX(5px);
-            text-shadow: 0 0 10px #00d4aa;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 60px;
-        }
-
-        .page-btn {
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .page-btn:hover,
-        .page-btn.active {
-            background: rgba(0, 212, 170, 0.3);
-            border-color: #00d4aa;
-            color: #00d4aa;
-            transform: translateY(-2px);
-        }
-
-        .sidebar-fixed {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            z-index: 50;
-        }
-
-        .social-link {
-            display: block;
-            width: 50px;
-            height: 50px;
-            margin-bottom: 15px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-10px) scale(1.1) rotateZ(360deg);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .sidebar-fixed { display: none; }
-            .blog-post {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .blog-image {
-                width: 100%;
-                height: 200px;
-            }
-            .category-filters {
-                gap: 10px;
-            }
-            .filter-btn {
-                font-size: 0.8rem;
-                padding: 8px 15px;
-            }
-            .page-header h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: particleFloat 15s infinite linear;
-        }
-
-        @keyframes particleFloat {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+    .social-icons a:hover {
+      color: #00ffe1;
+    }
+  </style>
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
+  <nav>
+    <div class="logo">TechBytes</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Projects</a>
+      <a href="#">Blog</a>
     </div>
+  </nav>
 
-    <header class="glass">
-        <nav>
-            <div class="logo">TechCrystal</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="/blog.html">Blogs</a></li>
-                <li><a href="#tutorials">Tutorials</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
+  <h1>TechBytes Blog</h1>
 
-    <main>
-        <div class="page-header">
-            <h1>Latest Blog Posts</h1>
-            <p>Explore cutting-edge tutorials, project guides, and insights in electronics, AI, and IoT development</p>
-        </div>
+  <div class="categories">
+    <div class="category">All</div>
+    <div class="category">Arduino</div>
+    <div class="category">Raspberry Pi</div>
+    <div class="category">IoT</div>
+    <div class="category">AI</div>
+    <div class="category">Machine Learning</div>
+  </div>
 
-        <div class="filter-section glass" style="padding: 20px; margin-bottom: 40px;">
-            <div class="category-filters">
-                <button class="filter-btn active" data-category="all">All Posts</button>
-                <button class="filter-btn" data-category="arduino">Arduino</button>
-                <button class="filter-btn" data-category="raspberry-pi">Raspberry Pi</button>
-                <button class="filter-btn" data-category="ai-ml">AI & ML</button>
-                <button class="filter-btn" data-category="iot">IoT</button>
-                <button class="filter-btn" data-category="reviews">Reviews</button>
-                <button class="filter-btn" data-category="tutorials">Tutorials</button>
-            </div>
-        </div>
+  <div class="container">
+    <!-- Blog post sample -->
+    <div class="blog-post">
+      <div class="blog-content">
+        <h2>Connecting Raspberry Pi to the Internet in IoT</h2>
+        <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system...</p>
+        <a class="read-more" href="#">Read More</a>
+      </div>
+      <img src="pics/LED.png" alt="Blog Image" class="blog-image" />
+    </div>
+  </div>
 
-        <div class="blog-posts">
-            <article class="blog-post glass" data-category="ai-ml">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">AI & ML</span>
-                        <h2 class="blog-title">Building Neural Networks on Arduino Nano 33 BLE</h2>
-                        <p class="blog-description">Learn how to deploy TensorFlow Lite models on Arduino microcontrollers for real-time AI inference. This comprehensive guide covers model optimization, memory management, and practical implementation examples for edge AI applications.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>March 15, 2024 • 12 min read</span>
-                        <a href="./blog/2025-04-22-IoT.html" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">🤖</div>
-                </div>
-            </article>
-
-            <article class="blog-post glass" data-category="raspberry-pi">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">Raspberry Pi</span>
-                        <h2 class="blog-title">Complete IoT Dashboard with Raspberry Pi 4</h2>
-                        <p class="blog-description">Create a professional IoT monitoring system using Raspberry Pi, Python Flask, and real-time data visualization. Includes sensor integration, database management, and responsive web interface design for home automation projects.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>March 10, 2024 • 18 min read</span>
-                        <a href="#" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">🍓</div>
-                </div>
-            </article>
-
-            <article class="blog-post glass" data-category="iot">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">IoT</span>
-                        <h2 class="blog-title">ESP32 Smart Home Automation Hub</h2>
-                        <p class="blog-description">Build a comprehensive smart home system using ESP32, MQTT protocol, and Home Assistant integration. Control lights, monitor sensors, and automate devices with voice commands and mobile app connectivity.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>March 5, 2024 • 15 min read</span>
-                        <a href="#" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">📡</div>
-                </div>
-            </article>
-
-            <article class="blog-post glass" data-category="arduino">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">Arduino</span>
-                        <h2 class="blog-title">Advanced Arduino Programming Techniques</h2>
-                        <p class="blog-description">Master advanced Arduino programming concepts including interrupts, timers, memory optimization, and efficient sensor data handling. Perfect for intermediate developers looking to enhance their embedded programming skills.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>February 28, 2024 • 14 min read</span>
-                        <a href="#" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">⚡</div>
-                </div>
-            </article>
-
-            <article class="blog-post glass" data-category="reviews">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">Reviews</span>
-                        <h2 class="blog-title">Arduino vs Raspberry Pi: Complete Comparison 2024</h2>
-                        <p class="blog-description">Detailed comparison of Arduino and Raspberry Pi platforms covering performance, use cases, development environment, community support, and project suitability. Make informed decisions for your next electronics project.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>February 20, 2024 • 10 min read</span>
-                        <a href="#" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">🔬</div>
-                </div>
-            </article>
-
-            <article class="blog-post glass" data-category="tutorials">
-                <div class="blog-content">
-                    <div>
-                        <span class="category-tag">Tutorials</span>
-                        <h2 class="blog-title">PCB Design from Scratch: KiCad Complete Guide</h2>
-                        <p class="blog-description">Learn professional PCB design using KiCad from schematic capture to manufacturing files. Covers component selection, routing strategies, design rule checks, and preparing files for production.</p>
-                    </div>
-                    <div class="blog-meta">
-                        <span>February 15, 2024 • 25 min read</span>
-                        <a href="#" class="read-more">Read Full Article →</a>
-                    </div>
-                </div>
-                <div class="blog-image">
-                    <div class="image-placeholder">🔧</div>
-                </div>
-            </article>
-        </div>
-
-        <div class="pagination">
-            <a href="#" class="page-btn">← Previous</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">Next →</a>
-        </div>
-    </main>
-
-    <aside class="sidebar-fixed">
-        <a href="#" class="social-link">🔧</a>
-        <a href="#" class="social-link">💻</a>
-        <a href="#" class="social-link">📱</a>
-        <a href="#" class="social-link">🤖</a>
-    </aside>
-
-    <script>
-        // Category filtering functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const blogPosts = document.querySelectorAll('.blog-post');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-
-                const category = btn.getAttribute('data-category');
-
-                blogPosts.forEach(post => {
-                    if (category === 'all' || post.getAttribute('data-category') === category) {
-                        post.style.display = 'flex';
-                        post.style.animation = 'fadeInUp 0.5s ease forwards';
-                    } else {
-                        post.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Create floating particles with tech colors
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            
-            const colors = ['#00d4aa', '#00a8ff', '#0078ff', '#ff6b6b', '#ffd93d'];
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.boxShadow = `0 0 6px ${particle.style.background}`;
-            
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 25000);
-        }
-
-        setInterval(createParticle, 2000);
-
-        // Header scroll effect
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                header.style.transform = 'translateX(-50%) translateY(-100%)';
-            } else {
-                header.style.transform = 'translateX(-50%) translateY(0)';
-            }
-            lastScrollY = window.scrollY;
-        });
-
-        // Blog post hover effects
-        document.querySelectorAll('.blog-post').forEach(post => {
-            post.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            post.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add fade in animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+  <footer>
+    <h2>Connect with Us</h2>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://medium.com/" target="_blank"><i class="fab fa-medium"></i></a>
+      <a href="https://discord.com/" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
+  </footer>
 </body>
 </html>

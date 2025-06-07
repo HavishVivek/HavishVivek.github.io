@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connecting Raspberry Pi to the Internet in IoT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0f0f1a;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 6px;
+      background: #00ffe1;
+      width: 0%;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+      margin-top: 60px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+    }
+
+    h1, h2 {
+      color: white;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    a {
+      color: #00ffe1;
+      text-decoration: underline;
+    }
+
+    figure {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    figure img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: #00ffe133;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    pre {
+      background: #1d1d2e;
+      color: #0f0;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 10px 20px;
+      background: #00ffe133;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #00ffe166;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.3rem; }
+      .container { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="container">
+    <div class="tags">
+      <div class="tag">IoT</div>
+      <div class="tag">RaspberryPi</div>
+      <div class="tag">Electronics</div>
+    </div>
+
+    <h1>Connecting Raspberry Pi to the Internet in IoT</h1>
+
+    <p>In this blog, we explore how to build a simple IoT-based night-light system using a Raspberry Pi and the MQTT protocol. MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications...</p>
+
+    <h2>We’ll dive into the following steps:</h2>
+    <ul>
+      <li>Understanding the MQTT and telemetry</li>
+      <li>The hardware setup for the night light</li>
+      <li>The code that controls the night light</li>
+      <li>Steps to connect the Raspberry Pi to an MQTT broker</li>
+      <li>How the Raspberry Pi can receive telemetry messages and respond accordingly</li>
+    </ul>
+
+    <h2>What is MQTT and Telemetry</h2>
+    <p>MQTT is a lightweight and open-source messaging protocol designed for small, low-power devices... Telemetry allows devices like temperature sensors, motion detectors, or smart appliances to send data to the cloud...</p>
+
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Raspberry Pi with the latest Raspberry Pi OS</li>
+      <li><a href="https://www.seeedstudio.com/Grove-Base-Hat-for-Raspberry-Pi.html" target="_blank">Grove Base Hat for Raspberry Pi</a></li>
+      <li><a href="https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html" target="_blank">Grove - Light Sensor v1.2</a></li>
+      <li><a href="https://www.seeedstudio.com/Grove-Green-LED.html" target="_blank">Grove-Green LED</a></li>
+    </ul>
+
+    <h2>Circuits</h2>
+    <ul>
+      <li>LED module → D5 of Grove Base Hat</li>
+      <li>Light Sensor module → A0 of Grove Base Hat</li>
+    </ul>
+
+    <figure>
+      <img src="../pics/LED.png" alt="LED Circuit">
+      <figcaption>Connect the LED to pin D5.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="../pics/lightSensor.png" alt="Light Sensor">
+      <figcaption>Connect the Light Sensor to pin A0.</figcaption>
+    </figure>
+
+    <h2>Setting up Raspberry Pi for MQTT</h2>
+    <h3>1. Set up virtual environments</h3>
+    <pre><code>sudo apt install python3 python3-venv -y
+python3 -m venv iot-env
+source iot-env/bin/activate</code></pre>
+
+    <h3>2. Install MQTT and Grove libraries</h3>
+    <pre><code>pip3 install paho-mqtt
+sudo apt install git python3-dev</code></pre>
+
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrollPercent + "%";
+    });
+  </script>
+
+</body>
+</html>
