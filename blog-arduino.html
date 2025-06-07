@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connecting Raspberry Pi to the Internet in IoT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
+        font-family: 'Nippo';
+  font-weight: 250;
+  font-size: 18px;
       background: #0f0f1a;
       color: white;
       margin: 0;
@@ -39,8 +41,9 @@
 
     h1, h2 {
       color: white;
+        font-family: 'General Sans', sans-serif;
+  font-weight: 600;
     }
-
     ul {
       padding-left: 1.5rem;
     }
@@ -126,8 +129,9 @@
 
     <h1>Connecting Raspberry Pi to the Internet in IoT</h1>
 
-    <p>In this blog, we explore how to build a simple IoT-based night-light system using a Raspberry Pi and the MQTT protocol. MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications...</p>
+    <h2>Introduction</h2>
 
+    <p>In this blog, we explore how to build a simple IoT-based night-light system using a Raspberry Pi and the MQTT protocol. MQTT(Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications, especially when transmitting telemetry data like sensor readings or control signals between devices.</p>
     <h2>We’ll dive into the following steps:</h2>
     <ul>
       <li>Understanding the MQTT and telemetry</li>
@@ -138,7 +142,8 @@
     </ul>
 
     <h2>What is MQTT and Telemetry</h2>
-    <p>MQTT is a lightweight and open-source messaging protocol designed for small, low-power devices... Telemetry allows devices like temperature sensors, motion detectors, or smart appliances to send data to the cloud...</p>
+    <p>MQTT is a lightweight and open-source messaging protocol designed for small, low-power devices. It has a feature that allows for machine-to-machine communication. It works on a publish/subscribe model, where devices (clients) can send (publish) messages or receive (subscribe) messages through a central server known as the broker. Because of MQTT’s very little bandwidth and power to send the data, it’s perfect for Internet of Things (IoT) applications where devices like sensors and microcontrollers need to exchange information efficiently.</p>
+    <p>Telemetry is a process of collecting data from remote sensors or devices transmitting to another system-usually a cloud platform, for monitoring, analysis, or decision-making. In the context of IoT, telemetry allows devices like temperature sensors, motion detectors, or smart appliances to continuously send data to the cloud, where it can be stored, visualized, and acted upon.</p>
 
     <h2>Prerequisites</h2>
     <ul>
@@ -166,15 +171,271 @@
 
     <h2>Setting up Raspberry Pi for MQTT</h2>
     <h3>1. Set up virtual environments</h3>
-    <pre><code>sudo apt install python3 python3-venv -y
+    <p>Wen the virtualenv is setup, these libraries will install smoothly without any errors</p>
+    <p> The commands to execute:</p>
+
+    <div style="position: relative; margin-bottom: 1rem;">
+  <pre><code id="code">sudo apt install python3 python3-venv -y
 python3 -m venv iot-env
-source iot-env/bin/activate</code></pre>
+source name of virtual env/bin/activate</code></pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
+
+<script>
+  function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('code');
+    const code = codeElement.innerText;
+
+    // Use Clipboard API
+    navigator.clipboard.writeText(code).then(() => {
+      button.textContent = "Copied";
+      button.style.backgroundColor = "rgba(0,255,180,0.4)";
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "rgba(0,255,255,0.2)";
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      alert("Failed to copy. Try a modern browser.");
+    });
+  }
+</script>
 
     <h3>2. Install MQTT and Grove libraries</h3>
-    <pre><code>pip3 install paho-mqtt
-sudo apt install git python3-dev</code></pre>
+    <p> Command to install the MQTT library:</p>
+    <div style="position: relative; margin-bottom: 1rem;">
+  <pre><code id="code">pip3 install paho-mqtt</code></pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
 
-    <a href="index.html" class="back-btn">← Back to Home</a>
+<script>
+  function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('code');
+    const code = codeElement.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.textContent = "Copied";
+      button.style.backgroundColor = "rgba(0,255,180,0.4)";
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "rgba(0,255,255,0.2)";
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      alert("Failed to copy. Try a modern browser.");
+    });
+  }
+</script>
+
+<p> Commands to install the grove library:</p>
+<div style="position: relative; margin-bottom: 1rem;">
+  <pre><code id="code">sudo apt install git python3-dev python3-pip --yes
+
+git clone https://github.com/Seeed-Studio/grove.py
+cd grove.py
+sudo pip3 install .</code></pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
+
+<script>
+  function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('code');
+    const code = codeElement.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.textContent = "Copied";
+      button.style.backgroundColor = "rgba(0,255,180,0.4)";
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "rgba(0,255,255,0.2)";
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      alert("Failed to copy. Try a modern browser.");
+    });
+  }
+</script>
+
+<h2>Code for IoT-based night-light system</h2>
+   <ul>
+      <li>Night Light code</li>
+      <li>Connecting the Raspberry Pi to the MQTT code</li>
+      <li>Sending telemetry to the MQTT broker code</li>
+      <li>Receiving telemetry from the MQTT broker code</li>
+      <li>Turning the LED module using Server code</li>
+    </ul>
+
+    <h2>1. Code Night Light</h2>
+    <p>This code prints the light sensor data. If the light sensor has a value of less than 300, the LED(actuator) will turn on, otherwise, the LED will be off.</p>
+    <div style="position: relative; margin-bottom: 1rem;">
+  <pre><code id="code">import time
+from grove.grove_light_sensor_v1_2 import GroveLightSensor
+from grove.grove_led import GroveLed
+
+light_sensor = GroveLightSensor(0)
+led = GroveLed(5)
+
+# While True loop to print the light sensor and turn on LED when light sensor value is less than 300
+while True:
+    light = light_sensor.light
+    print('Light level:', light)
+
+    if light > 300:
+        led.on()
+    else:
+        led.off()
+    
+    time.sleep(1)</code></pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
+
+<script>
+  function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('code');
+    const code = codeElement.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.textContent = "Copied";
+      button.style.backgroundColor = "rgba(0,255,180,0.4)";
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "rgba(0,255,255,0.2)";
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      alert("Failed to copy. Try a modern browser.");
+    });
+  }
+</script>
+<h2>2. Code for connecting the Raspberry Pi to MQTT</h2>
+<div style="position: relative; margin-bottom: 1rem;">
+  <pre><code># Import the grove light sensor libary and grove LED libary
+# Import the mqtt client libary
+import time
+from grove.grove_light_sensor_v1_2 import GroveLightSensor
+from grove.grove_led import GroveLed
+import paho.mqtt.client as mqtt
+
+# Make a variable to store the light sensor pin and led pin
+light_sensor = GroveLightSensor(0)
+led = GroveLed(5)
+
+# Setup the id for client(device)
+id = '&lt;ID&gt;'
+
+# Setup a client name 
+client_name = id + 'nightlight_client'
+
+# The mqtt subscribe to client topic and connect it to test.mosquitto.org
+mqtt_client = mqtt.Client(client_name)
+mqtt_client.connect('test.mosquitto.org')
+
+# Start up the mqtt
+mqtt_client.loop_start()
+
+# print that the MQTT has been connected
+print("MQTT connected!")
+
+while True:
+    # geting the light sensor data and print to the console
+    light = light_sensor.light
+    print('Light level:', light)
+    # if the light sensor value is less than 300 than led will turn on, else the led will be off
+    if light &lt; 300:
+        led.on()
+    else:
+        led.off()
+    
+    time.sleep(1)</code></pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
+
+<script>
+  function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('code');
+    const code = codeElement.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.textContent = "Copied";
+      button.style.backgroundColor = "rgba(0,255,180,0.4)";
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "rgba(0,255,255,0.2)";
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      alert("Failed to copy. Try a modern browser.");
+    });
+  }
+</script>
+<h3>1. Import the Grove light sensor, LED, MQTT, and time libraries.</h3>
+<h3>2. Set up the light-sensor pin and LED pin.</h3>
+<h3>3. Set up the unique ID for the device using the link below:</h3>
+
+<a href="https://www.guidgen.com/?source=post_page-----330dd304ac38---------------------------------------" 
+   target="_blank"
+   style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #00ffe1; color: black; text-decoration: none; border-radius: 5px; font-family: 'Orbitron', sans-serif;">
+  Generate GUID
+</a>
+<p>The ID is used to connect the device to MQTT, ensuring the connection between the device and the MQTT</p>
+<h3>5. Connect the mqtt_client to the test.mosquitto.org, which is a website to connect to the MQTT Server</h3>
+
+    <a href="./blog.html" class="back-btn">← Back to Home</a>
   </div>
 
   <script>
@@ -186,6 +447,7 @@ sudo apt install git python3-dev</code></pre>
       progressBar.style.width = scrollPercent + "%";
     });
   </script>
+  
 
 </body>
 </html>
