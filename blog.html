@@ -166,6 +166,32 @@
     .social-icons a:hover {
       color: #00ffe1;
     }
+    .blog-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,255,255,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 40px;
+}
+
+.blog-post.reverse {
+  flex-direction: row-reverse;
+}
+
+.blog-thumbnail {
+  flex: 1;
+  max-width: 300px;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 20px;
+  flex: 2;
+}
   </style>
 </head>
 <body>
@@ -189,17 +215,39 @@
     <div class="category">Machine Learning</div>
   </div>
 
-  <div class="container">
-    <!-- Blog post sample -->
-    <div class="blog-post">
-      <div class="blog-content">
-        <h2>Connecting Raspberry Pi to the Internet in IoT</h2>
-        <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system...</p>
-        <a class="read-more" href="./blog-arduino.html">Read More</a>
-      </div>
-      <img src="./1.png" alt="Blog Image" class="blog-image" />
+ <div class="container">
+
+  <!-- Blog Post 1 (Image Right) -->
+  <div class="blog-post">
+    <img src="./1.png" class="blog-thumbnail" alt="Blog Thumbnail" />
+    <div class="blog-content">
+      <h2>Post 1: Connecting Raspberry Pi to the Internet in IoT</h2>
+      <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system...</p>
+      <a href="./blog-arduino.html" class="read-more">Read More →</a>
     </div>
   </div>
+
+  <!-- Blog Post 2 (Image Left) -->
+  <div class="blog-post reverse">
+    <img src="https://via.placeholder.com/300x200" class="blog-thumbnail" alt="Blog Thumbnail" />
+    <div class="blog-content">
+      <h2>Post 2: Arduino and Sensors</h2>
+      <p>Build a sensor network using Arduino and real-time data visualization.</p>
+      <a href="./blog.html" class="read-more">Read More →</a>
+    </div>
+  </div>
+
+  <!-- Blog Post 3 (Image Right again) -->
+  <div class="blog-post">
+    <img src="https://via.placeholder.com/300x200" class="blog-thumbnail" alt="Blog Thumbnail" />
+    <div class="blog-content">
+      <h2>Post 3: AI + IoT Combo</h2>
+      <p>Integrate AI models into your IoT projects using Edge TPU.</p>
+      <a href="./blog.html" class="read-more">Read More →</a>
+    </div>
+  </div>
+
+</div>
 
   <footer>
     <h2>Connect with Us</h2>
