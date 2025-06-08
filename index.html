@@ -65,7 +65,8 @@
       box-shadow: 0 0 30px rgba(0,255,255,0.1);
       animation: fadeIn 1.5s ease-in-out;
       transition: all 0.6s ease-in-out;
-      padding: 20px;
+      padding: 60px 20px 20px 20px;
+       transform: translateY(20px);
     }
 
     .profile-pic {
@@ -120,6 +121,32 @@
       background: rgba(0, 255, 255, 0.4);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     }
+
+    .sweep-animate::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0, 255, 255, 0.6),
+        transparent
+      );
+      transform: skewX(-25deg);
+      animation: sweep 2s infinite;
+    }
+
+    @keyframes sweep {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -127,13 +154,13 @@
     <div class="line-flow"></div>
   </div>
 
-  <div class="hero">
+  <div class="hero sweep-animate">
     <img src="./Havish.png" alt="Your Profile Picture" class="profile-pic">
     <h1>Welcome to TechBytes with Havish</h1>
     <p>Explore the latest in Raspberry Pi, Arduino, IoT, AI, and Machine Learning!</p>
     <div class="buttons">
       <a href="blog.html"><button class="btn">Blog</button></a>
-      <button class="btn">Projects</button>
+      <a href="./video.html"><button class="btn">Video</button></a>
       <button class="btn">About</button>
     </div>
   </div>
