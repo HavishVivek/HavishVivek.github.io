@@ -27,11 +27,19 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      flex-wrap: wrap;
     }
 
-    nav .logo {
+    nav .logo a {
       font-size: 1.5rem;
       color: #00ffe1;
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav .nav-links a {
@@ -48,7 +56,8 @@
     h1 {
       text-align: center;
       color: #00ffe1;
-      margin: 30px 0 20px;
+      margin: 30px 10px 20px;
+      font-size: 2rem;
     }
 
     .categories {
@@ -57,6 +66,7 @@
       gap: 15px;
       margin-bottom: 30px;
       flex-wrap: wrap;
+      padding: 0 10px;
     }
 
     .category {
@@ -65,6 +75,7 @@
       border-radius: 20px;
       cursor: pointer;
       transition: 0.3s;
+      font-size: 0.9rem;
     }
 
     .category:hover, .category.active {
@@ -98,6 +109,7 @@
     .blog-thumbnail {
       flex: 1;
       max-width: 300px;
+      width: 100%;
       height: auto;
       object-fit: cover;
     }
@@ -156,111 +168,175 @@
       100% { transform: scale(1); }
     }
 
-    .blog-post:hover {
-      animation: breathe 1.5s ease-in-out infinite;
+    /* Desktop hover breathing animation */
+    @media (hover: hover) {
+      .blog-post:hover {
+        animation: breathe 1.5s ease-in-out infinite;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        z-index: 1;
+      }
+    }
+
+    /* Mobile touch breathing animation */
+    .blog-post.touch-breathe {
+      animation: breathe 1.5s ease-in-out 3;
       box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
       z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+      }
+
+      nav .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      nav .nav-links a {
+        margin: 8px 0;
+      }
+
+      .blog-post,
+      .blog-post.reverse {
+        flex-direction: column;
+      }
+
+      .blog-thumbnail {
+        max-width: 100%;
+      }
+
+      .read-more-wrapper {
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .read-more-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">TechBytes</div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Blog</a>
-      <a href="#">Contact</a>
-    </div>
-  </nav>
-
-  <h1>Latest Tech Blogs</h1>
-
-  <div class="categories">
-    <div class="category active" data-category="all">All</div>
-    <div class="category" data-category="iot">IoT</div>
-    <div class="category" data-category="ai">AI</div>
-    <div class="category" data-category="RaspberryPi">RaspberryPi</div>
+<nav>
+  <div class="logo">
+    <a href="./index.html">TechBytes</a>
   </div>
+  <div class="nav-links">
+    <a href="./index.html">Home</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
 
-  <div class="container">
-    <div class="blog-post reverse" data-category="web">
-      <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=Web+Dev" alt="Web blog image" />
-      <div class="blog-content">
-        <h2>Next-Gen Web Design Trends</h2>
-        <p>Discover the latest innovations and visual trends in web development and UI/UX.</p>
-        <div class="read-more-wrapper">
-          <a class="read-more-btn" href="./blog-web.html">Read More →</a>
-        </div>
-      </div>
-    </div>
+<h1>Latest Tech Blogs</h1>
 
-    <div class="blog-post" data-category="iot RaspberryPi">
-      <img class="blog-thumbnail" src="./1.png" alt="IoT blog image" />
-      <div class="blog-content">
-        <h2>Connecting Raspberry Pi to the Internet in IoT</h2>
-        <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system using real-world examples.</p>
-        <div class="read-more-wrapper">
-          <a class="read-more-btn" href="./blog-arduino.html">Read More →</a>
-        </div>
-      </div>
-    </div>
+<div class="categories">
+  <div class="category active" data-category="all">All</div>
+  <div class="category" data-category="iot">IoT</div>
+  <div class="category" data-category="ai">AI</div>
+  <div class="category" data-category="RaspberryPi">RaspberryPi</div>
+</div>
 
-    <div class="blog-post reverse" data-category="ai">
-      <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=AI+Model" alt="AI blog image" />
-      <div class="blog-content">
-        <h2>The Rise of AI in 2025</h2>
-        <p>How artificial intelligence is reshaping industries and everyday life.</p>
-        <div class="read-more-wrapper">
-          <a class="read-more-btn" href="./blog-ai.html">Read More →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="blog-post" data-category="web">
-      <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=Web+Dev" alt="Web blog image" />
-      <div class="blog-content">
-        <h2>Design Trends in Responsive Web</h2>
-        <p>Learn how responsive design is evolving for the next generation of devices.</p>
-        <div class="read-more-wrapper">
-          <a class="read-more-btn" href="./blog-responsive.html">Read More →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="blog-post reverse" data-category="iot">
-      <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=IoT+Sensors" alt="IoT blog image" />
-      <div class="blog-content">
-        <h2>IoT Sensors in Agriculture</h2>
-        <p>Learn how IoT sensors are revolutionizing the farming industry with real-time data.</p>
-        <div class="read-more-wrapper">
-          <a class="read-more-btn" href="./blog-iot.html">Read More →</a>
-        </div>
+<div class="container">
+  <div class="blog-post reverse" data-category="web">
+    <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=Web+Dev" alt="Web blog image" />
+    <div class="blog-content">
+      <h2>Next-Gen Web Design Trends</h2>
+      <p>Discover the latest innovations and visual trends in web development and UI/UX.</p>
+      <div class="read-more-wrapper">
+        <a class="read-more-btn" href="./blog-web.html">Read More →</a>
       </div>
     </div>
   </div>
 
-  <script>
-    const categories = document.querySelectorAll(".category");
-    const posts = document.querySelectorAll(".blog-post");
+  <div class="blog-post" data-category="iot RaspberryPi">
+    <img class="blog-thumbnail" src="./pics/mqtt.png" alt="IoT blog image" />
+    <div class="blog-content">
+      <h2>Connecting Raspberry Pi to the Internet in IoT</h2>
+      <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system using real-world examples.</p>
+      <div class="read-more-wrapper">
+        <a class="read-more-btn" href="./blog-arduino.html">Read More →</a>
+      </div>
+    </div>
+  </div>
 
-    categories.forEach(cat => {
-      cat.addEventListener("click", () => {
-        document.querySelector(".category.active").classList.remove("active");
-        cat.classList.add("active");
+  <div class="blog-post reverse" data-category="ai">
+    <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=AI+Model" alt="AI blog image" />
+    <div class="blog-content">
+      <h2>The Rise of AI in 2025</h2>
+      <p>How artificial intelligence is reshaping industries and everyday life.</p>
+      <div class="read-more-wrapper">
+        <a class="read-more-btn" href="./blog-ai.html">Read More →</a>
+      </div>
+    </div>
+  </div>
 
-        const selectedCategory = cat.dataset.category;
+  <div class="blog-post" data-category="web">
+    <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=Web+Dev" alt="Web blog image" />
+    <div class="blog-content">
+      <h2>Design Trends in Responsive Web</h2>
+      <p>Learn how responsive design is evolving for the next generation of devices.</p>
+      <div class="read-more-wrapper">
+        <a class="read-more-btn" href="./blog-responsive.html">Read More →</a>
+      </div>
+    </div>
+  </div>
 
-        posts.forEach(post => {
-          const postCategories = post.dataset.category.split(" ");
-          if (selectedCategory === "all" || postCategories.includes(selectedCategory)) {
-            post.style.display = "flex";
-          } else {
-            post.style.display = "none";
-          }
-        });
+  <div class="blog-post reverse" data-category="iot">
+    <img class="blog-thumbnail" src="https://via.placeholder.com/300x200?text=IoT+Sensors" alt="IoT blog image" />
+    <div class="blog-content">
+      <h2>IoT Sensors in Agriculture</h2>
+      <p>Learn how IoT sensors are revolutionizing the farming industry with real-time data.</p>
+      <div class="read-more-wrapper">
+        <a class="read-more-btn" href="./blog-iot.html">Read More →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const categories = document.querySelectorAll(".category");
+  const posts = document.querySelectorAll(".blog-post");
+
+  categories.forEach(cat => {
+    cat.addEventListener("click", () => {
+      document.querySelector(".category.active").classList.remove("active");
+      cat.classList.add("active");
+
+      const selectedCategory = cat.dataset.category;
+
+      posts.forEach(post => {
+        const postCategories = post.dataset.category.split(" ");
+        if (selectedCategory === "all" || postCategories.includes(selectedCategory)) {
+          post.style.display = "flex";
+        } else {
+          post.style.display = "none";
+        }
       });
     });
-  </script>
+  });
+
+  // Mobile breathing animation on touch
+  posts.forEach(post => {
+    post.addEventListener('touchstart', () => {
+      post.classList.add('touch-breathe');
+      setTimeout(() => {
+        post.classList.remove('touch-breathe');
+      }, 4500); // 1.5s * 3 loops
+    });
+  });
+</script>
+
 </body>
 </html>
