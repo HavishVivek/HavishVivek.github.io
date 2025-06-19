@@ -1,10 +1,14 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connecting Raspberry Pi to the Internet in IoT</title>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
+  <!-- Highlight.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
   <style>
     * {
       box-sizing: border-box;
@@ -482,8 +486,70 @@ while True:
 </a>
 <p>The ID is used to connect the device to MQTT, ensuring the connection between the device and the MQTT</p>
 <h3>5. Connect the mqtt_client to the test.mosquitto.org, which is a website to connect to the MQTT Server</h3>
-  </div>
+<h3>6. Start theMQTT and print to the console</h3>
+<h3>7. Make a while true loop</h3>
+<h3>7.1. Start the light sensor and print the values coming from the sensor</h3>
+<h3>7.2 Make an if statement if the light sensor value is less than 300, then turn on the LED; otherwise, the LED is off</h3>
+<h3>8. Finally, sleep for 1 second</h3>
+<h2>3. Code for sending Telemetry to the MQTT Broker</h2>
+<div style="position: relative; margin-bottom: 1rem;">
+  <pre style="border-radius: 10px; overflow-x: auto;">
+    <code class="language-python"># Import the grove light sensor library and grove LED library
+# Import the mqtt client library and json library
+import time
+from grove.grove_light_sensor_v1_2 import GroveLightSensor
+from grove.grove_led import GroveLed
+import paho.mqtt.client as mqtt
+import json
 
+# Make a variable to store the light sensor pin and led pin
+light_sensor = GroveLightSensor(0)
+led = GroveLed(5)
+
+# Setup the id for client(device)
+id = '&lt;ID&gt;'
+
+# Setup a client name and client topic
+client_telemetry_topic = id + '/telemetry'
+client_name = id + 'nightlight_client'
+
+# The mqtt subscribe to client topic and connect it to test.mosquitto.org
+mqtt_client = mqtt.Client(client_name)
+mqtt_client.connect('test.mosquitto.org')
+
+# Start up the mqtt
+mqtt_client.loop_start()
+
+# print that the MQTT has been connected
+print("MQTT connected!")
+
+while True:
+    # Getting the light sensor data and print it in json format
+    light = light_sensor.light
+    telemetry = json.dumps({'light': light})
+
+    print("Sending telemetry ", telemetry)
+
+    mqtt_client.publish(client_telemetry_topic, telemetry)
+
+    time.sleep(5)
+    </code>
+  </pre>
+  <button onclick="copyCode(this)" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+  ">Copy</button>
+</div>
+  </div>
+<h3>1. Import the Grove light sensor, LED, MQTT, and time libraries.</h3>
   <script>
     const progressBar = document.getElementById('progressBar');
     window.addEventListener('scroll', () => {
@@ -496,4 +562,4 @@ while True:
   
 
 </body>
-</html>
+</html> 
