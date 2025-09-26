@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My App Project - TechBytes with Havish</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle, #1a1a2e, #16213e);
+      color: #fff;
+      overflow-x: hidden;
+      perspective: 1200px; /* Needed for 3D */
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .line-flow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
+      background-size: 400% 100%;
+      animation: flowLine 8s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes flowLine {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    header {
+      text-align: center;
+      padding: 8rem 1rem 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      color: #00ffe1;
+      text-shadow: 0 0 12px #00ffe1;
+      margin: 0;
+      transform: scale(0.2) rotateX(90deg);
+      opacity: 0;
+    }
+
+    header p {
+      color: #ccc;
+      max-width: 800px;
+      margin: 1.5rem auto 0;
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .app-intro {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .app-intro-text {
+      flex: 1 1 400px;
+    }
+
+    .app-intro img {
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.6);
+    }
+
+    /* Sticky Screens Section */
+    .screens-sticky {
+      position: relative;
+      height: 500vh; /* enough scroll space for 4+ screens */
+    }
+
+    .screen-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.8s ease-out;
+    }
+
+    .screen img {
+      width: 280px;
+      border-radius: 1rem;
+      box-shadow: 0 0 25px rgba(0,255,255,0.3);
+    }
+
+    .screen.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .video-section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .video-section iframe {
+      width: 100%;
+      height: 500px;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+    }
+
+    /* FAQ Sticky Stacking */
+    .faq-sticky {
+      position: relative;
+      height: 400vh; /* enough space for stacking */
+    }
+
+    .faq-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .faq-card {
+      position: absolute;
+      max-width: 700px;
+      padding: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      transition: all 0.8s ease;
+    }
+
+    .faq-card.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .faq-card h3 {
+      color: #00ffe1;
+      margin-bottom: 1rem;
+    }
+
+    .coming-soon {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(0, 255, 255, 0.2);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .btn:hover {
+      background: rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="line-flow"></div>
+  </div>
+
+  <header>
+    <h1 id="appTitle">My Productivity App</h1>
+    <p id="appSubtitle">Track tasks, earn tokens, and unlock celebrations. A fun way to stay productive!</p>
+  </header>
+
+  <section class="app-intro">
+    <div class="app-intro-text">
+      <h2>About the App</h2>
+      <p>
+        This app helps kids and parents stay engaged with tasks through a token-based
+        reward system. Kids complete tasks to earn tokens, and parents can schedule
+        celebrations when goals are achieved. Built with Flutter + Firebase.
+      </p>
+    </div>
+    <img src="./app-logo.png" alt="App Logo">
+  </section>
+
+  <!-- Sticky Screens -->
+  <section class="screens-sticky">
+    <div class="screen-wrapper">
+      <div class="screen"><img src="./1.jpg" alt="App Screen 1"></div>
+      <div class="screen"><img src="./2.jpg" alt="App Screen 2"></div>
+      <div class="screen"><img src="./3.jpg" alt="App Screen 3"></div>
+      <div class="screen"><img src="./7.png" alt="App Screen 4"></div>
+      <div class="screen"><img src="./5.png" alt="App Screen 5"></div>
+      <div class="screen"><img src="./6.png" alt="App Screen 6"></div>
+      <div class="screen"><img src="./3.jpg" alt="App Screen 7"></div>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <h2>App Demo Video</h2>
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+  </section>
+
+  <!-- FAQ Sticky Stacking -->
+  <section class="faq-sticky">
+    <div class="faq-wrapper">
+      <div class="faq-card">
+        <h3>What platforms does the app support?</h3>
+        <p>The app is available on Android and iOS.</p>
+      </div>
+      <div class="faq-card">
+        <h3>Do tokens reset every day?</h3>
+        <p>No, tokens are cumulative until goals are met.</p>
+      </div>
+      <div class="faq-card">
+        <h3>Can parents customize celebrations?</h3>
+        <p>Yes, parents can add, edit, and schedule custom celebrations.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="coming-soon">
+    <button class="btn">Coming Soon</button>
+  </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 3D scroll zoom animation for app title
+    gsap.to("#appTitle", {
+      scrollTrigger: {
+        trigger: "#appTitle",
+        start: "top center",
+        end: "bottom top",
+        scrub: true
+      },
+      scale: 1,
+      rotateX: 0,
+      opacity: 1,
+      duration: 2,
+      ease: "power3.out"
+    });
+
+    gsap.to("#appSubtitle", {
+      scrollTrigger: {
+        trigger: "#appTitle",
+        start: "top center+=100",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power2.out"
+    });
+
+    // Sticky Screens logic
+    const screens = document.querySelectorAll('.screen');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const sectionTop = document.querySelector('.screens-sticky').offsetTop;
+      const sectionHeight = document.querySelector('.screens-sticky').offsetHeight;
+      const progress = Math.min(Math.max((scrollY - sectionTop) / sectionHeight, 0), 1);
+
+      const index = Math.floor(progress * screens.length);
+      screens.forEach((screen, i) => {
+        if (i === index) {
+          screen.classList.add('active');
+        } else {
+          screen.classList.remove('active');
+        }
+      });
+    });
+
+    // FAQ Sticky Stacking
+    const faqCards = document.querySelectorAll('.faq-card');
+    const faqSection = document.querySelector('.faq-sticky');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const sectionTop = faqSection.offsetTop;
+      const sectionHeight = faqSection.offsetHeight;
+      const progress = Math.min(Math.max((scrollY - sectionTop) / sectionHeight, 0), 1);
+
+      const index = Math.floor(progress * faqCards.length);
+      faqCards.forEach((card, i) => {
+        if (i === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - TechBytes with Havish</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle, #1a1a2e, #16213e);
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .line-flow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
+      background-size: 400% 100%;
+      animation: flowLine 8s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes flowLine {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+      box-shadow: 0 0 30px rgba(0,255,255,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #00ffe1;
+      text-shadow: 0 0 10px #00ffe1;
+    }
+
+    header p {
+      color: #ccc;
+      margin-top: 10px;
+    }
+
+    /* Tag Filter Buttons */
+    .tag-filters {
+      text-align: center;
+      margin: 1rem 0 2rem;
+    }
+
+    .tag-btn {
+      display: inline-block;
+      margin: 0.3rem;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      background: rgba(0,255,255,0.15);
+      color: #00ffe1;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .tag-btn:hover,
+    .tag-btn.active {
+      background: rgba(0,255,255,0.4);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0,255,255,0.6);
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(0,255,255,0.5);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 2px solid rgba(0,255,255,0.3);
+    }
+
+    .project-card-content {
+      padding: 1rem;
+    }
+
+    .project-card-content h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      color: #00ffe1;
+      text-shadow: 0 0 8px rgba(0,255,255,0.6);
+    }
+
+    .project-card-content p {
+      margin: 0 0 0.8rem;
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    /* Project Tags inside cards */
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tags span {
+      background: rgba(0,255,255,0.15);
+      border-radius: 15px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      color: #00ffe1;
+      font-weight: bold;
+    }
+
+    /* Animation entry */
+    .project-card {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s forwards;
+    }
+
+    .project-card:nth-child(1) { animation-delay: 0.2s; }
+    .project-card:nth-child(2) { animation-delay: 0.4s; }
+    .project-card:nth-child(3) { animation-delay: 0.6s; }
+    .project-card:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="line-flow"></div>
+  </div>
+
+  <header>
+    <h1>My Projects</h1>
+    <p>Explore the projects I’ve built over the years</p>
+  </header>
+
+  <!-- Tag Filters -->
+  <div class="tag-filters">
+    <button class="tag-btn active" onclick="filterProjects('all')">All</button>
+    <button class="tag-btn" onclick="filterProjects('App')">App</button>
+    <button class="tag-btn" onclick="filterProjects('IoT')">IoT</button>
+    <button class="tag-btn" onclick="filterProjects('AI')">AI</button>
+    <button class="tag-btn" onclick="filterProjects('Robotics')">Robotics</button>
+  </div>
+
+  <div class="projects-container">
+    <!-- Project Card 1 -->
+    <div class="project-card" data-tags="App">
+      <img src="./app-logo.png" alt="App Project" onclick="window.location.href='app-project.html'">
+      <div class="project-card-content">
+        <h2>Lets us Celebrate</h2>
+        <p>A productivity app with tokens and celebrations.</p>
+        <div class="project-tags">
+          <span>App</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 2 -->
+    <div class="project-card" data-tags="IoT">
+      <img src="iot-project.jpg" alt="IoT Project" onclick="window.location.href='iot-project.html'">
+      <div class="project-card-content">
+        <h2>IoT Night Light</h2>
+        <p>An IoT project with MQTT and light sensing.</p>
+        <div class="project-tags">
+          <span>IoT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 3 -->
+    <div class="project-card" data-tags="AI">
+      <img src="ai-project.jpg" alt="AI Project" onclick="window.location.href='ai-project.html'">
+      <div class="project-card-content">
+        <h2>AI Dino Game</h2>
+        <p>A fun game controlled with face blinking AI.</p>
+        <div class="project-tags">
+          <span>AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 4 -->
+    <div class="project-card" data-tags="Robotics">
+      <img src="robot-arm.jpg" alt="Robotic Arm" onclick="window.location.href='robot-arm.html'">
+      <div class="project-card-content">
+        <h2>Robotic Arm</h2>
+        <p>A Raspberry Pi-powered robotic arm with vision.</p>
+        <div class="project-tags">
+          <span>Robotics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function filterProjects(tag) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.tag-btn');
+
+      // update button active state
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // filter cards
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags').split(',');
+        if (tag === 'all' || tags.includes(tag)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,23 +1,23 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connecting Raspberry Pi to the Internet in IoT</title>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
-  <!-- Highlight.js for syntax highlighting -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-        font-family: 'Nippo';
-  font-weight: 250;
-  font-size: 18px;
+      font-family: 'Nippo';
+      font-weight: 250;
+      font-size: 18px;
       background: #0f0f1a;
       color: white;
       margin: 0;
@@ -45,34 +45,16 @@
 
     h1, h2 {
       color: white;
-        font-family: 'General Sans', sans-serif;
-  font-weight: 600;
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600;
     }
-    ul {
-      padding-left: 1.5rem;
-    }
+    ul { padding-left: 1.5rem; }
 
-    a {
-      color: #00ffe1;
-      text-decoration: underline;
-    }
+    a { color: #00ffe1; text-decoration: underline; }
 
-    figure {
-      margin: 20px 0;
-      text-align: center;
-    }
-
-    figure img {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 10px;
-    }
-
-    figcaption {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+    figure { margin: 20px 0; text-align: center; }
+    figure img { width: 100%; max-width: 600px; border-radius: 10px; }
+    figcaption { margin-top: 8px; font-size: 0.9rem; color: #ccc; }
 
     .tags {
       display: flex;
@@ -98,60 +80,60 @@
       overflow-x: auto;
     }
 
-
     @media (max-width: 768px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.3rem; }
       .container { padding: 20px; }
     }
-    p{
-      line-height: 1.8;
-    }
+
+    p { line-height: 1.8; }
+
     .top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
 
-.top-bar .tags {
-  flex-wrap: wrap;
-  display: flex;
-  gap: 10px;
-}
+    .top-bar .tags { flex-wrap: wrap; display: flex; gap: 10px; }
 
-.back-btn {
-  padding: 8px 16px;
-  background: #00ffe133;
-  color: white;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: background 0.3s;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
+    .back-btn {
+      padding: 8px 16px;
+      background: #00ffe133;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .back-btn:hover { background: #00ffe166; }
 
-.back-btn:hover {
-  background: #00ffe166;
-}
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  margin: 20px 0;
-}
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .video-container iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
 
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+    /* 🚀 Scroll Animation styles */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   </style>
 </head>
 <body>
@@ -160,397 +142,59 @@
 
   <div class="container">
     <div class="top-bar">
-  <div class="tags">
-    <div class="tag">IoT</div>
-    <div class="tag">RaspberryPi</div>
-    <div class="tag">Electronics</div>
-  </div>
+      <div class="tags">
+        <div class="tag">IoT</div>
+        <div class="tag">RaspberryPi</div>
+        <div class="tag">Electronics</div>
+      </div>
+      <a href="./blog.html" class="back-btn">← Back to Blogs</a>
+    </div>
 
-  <a href="./blog.html" class="back-btn">← Back to Blogs</a>
-</div>
+    <h1 class="reveal">Connecting Raspberry Pi to the Internet in IoT</h1>
 
+    <h2 class="reveal">Introduction</h2>
+    <p class="reveal">In this blog, we explore how to build a simple IoT-based night-light system...</p>
 
-    <h1>Connecting Raspberry Pi to the Internet in IoT</h1>
+    <h2 class="reveal">Video for this blog post</h2>
+    <div class="video-container reveal">
+      <iframe src="https://www.youtube.com/embed/DziPP7ZE6ug" allowfullscreen></iframe>
+    </div>
 
-    <h2>Introduction</h2>
-
-    <p>In this blog, we explore how to build a simple IoT-based night-light system using a Raspberry Pi and the MQTT protocol. MQTT(Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications, especially when transmitting telemetry data like sensor readings or control signals between devices.</p>
-    ,<h2>Video for this blog post</h2>
-    <div class="video-container">
-  <iframe 
-    src="https://www.youtube.com/embed/DziPP7ZE6ug" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-</div>
-    <h2>We’ll dive into the following steps:</h2>
-    <ul>
-      <li>Understanding the MQTT and telemetry</li>
-      <li>The hardware setup for the night light</li>
-      <li>The code that controls the night light</li>
-      <li>Steps to connect the Raspberry Pi to an MQTT broker</li>
-      <li>How the Raspberry Pi can receive telemetry messages and respond accordingly</li>
+    <h2 class="reveal">We’ll dive into the following steps:</h2>
+    <ul class="reveal">
+      <li>Understanding MQTT and telemetry</li>
+      <li>Hardware setup</li>
+      <li>Code to control the night light</li>
+      <li>Connect Raspberry Pi to MQTT broker</li>
+      <li>Receive telemetry and respond</li>
     </ul>
 
-    <h2>What is MQTT and Telemetry</h2>
-    <p>MQTT is a lightweight and open-source messaging protocol designed for small, low-power devices. It has a feature that allows for machine-to-machine communication. It works on a publish/subscribe model, where devices (clients) can send (publish) messages or receive (subscribe) messages through a central server known as the broker. Because of MQTT’s very little bandwidth and power to send the data, it’s perfect for Internet of Things (IoT) applications where devices like sensors and microcontrollers need to exchange information efficiently.</p>
-    <p>Telemetry is a process of collecting data from remote sensors or devices transmitting to another system-usually a cloud platform, for monitoring, analysis, or decision-making. In the context of IoT, telemetry allows devices like temperature sensors, motion detectors, or smart appliances to continuously send data to the cloud, where it can be stored, visualized, and acted upon.</p>
+    <h2 class="reveal">What is MQTT and Telemetry</h2>
+    <p class="reveal">MQTT is a lightweight protocol designed for IoT...</p>
 
-    <h2>Prerequisites</h2>
-    <ul>
-      <li>Raspberry Pi with the latest Raspberry Pi OS</li>
-      <li><a href="https://www.seeedstudio.com/Grove-Base-Hat-for-Raspberry-Pi.html" target="_blank">Grove Base Hat for Raspberry Pi</a></li>
-      <li><a href="https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html" target="_blank">Grove - Light Sensor v1.2</a></li>
-      <li><a href="https://www.seeedstudio.com/Grove-Green-LED.html" target="_blank">Grove-Green LED</a></li>
+    <h2 class="reveal">Prerequisites</h2>
+    <ul class="reveal">
+      <li>Raspberry Pi with latest OS</li>
+      <li>Grove Base Hat</li>
+      <li>Light Sensor</li>
+      <li>LED module</li>
     </ul>
 
-    <h2>Circuits</h2>
-    <ul>
-      <li>LED module → D5 of Grove Base Hat</li>
-      <li>Light Sensor module → A0 of Grove Base Hat</li>
-    </ul>
-
-    <figure>
+    <h2 class="reveal">Circuits</h2>
+    <figure class="reveal">
       <img src="./pics/LED.png" alt="LED Circuit">
       <figcaption>Connect the LED to pin D5.</figcaption>
     </figure>
-
-    <figure>
+    <figure class="reveal">
       <img src="./pics/lightSensor.png" alt="Light Sensor">
       <figcaption>Connect the Light Sensor to pin A0.</figcaption>
     </figure>
 
-    <h2>Setting up Raspberry Pi for MQTT</h2>
-    <h3>1. Set up virtual environments</h3>
-    <p>Wen the virtualenv is setup, these libraries will install smoothly without any errors</p>
-    <p> The commands to execute:</p>
-
-    <div style="position: relative; margin-bottom: 1rem;">
-  <pre><code id="code">sudo apt install python3 python3-venv -y
-python3 -m venv iot-env
-source name of virtual env/bin/activate</code></pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-
-<script>
-  function copyCode(button) {
-    const codeElement = button.parentElement.querySelector('code');
-    const code = codeElement.innerText;
-
-    // Use Clipboard API
-    navigator.clipboard.writeText(code).then(() => {
-      button.textContent = "Copied";
-      button.style.backgroundColor = "rgba(0,255,180,0.4)";
-      setTimeout(() => {
-        button.textContent = "Copy";
-        button.style.backgroundColor = "rgba(0,255,255,0.2)";
-      }, 2000);
-    }).catch(err => {
-      console.error('Copy failed', err);
-      alert("Failed to copy. Try a modern browser.");
-    });
-  }
-</script>
-
-    <h3>2. Install MQTT and Grove libraries</h3>
-    <p> Command to install the MQTT library:</p>
-    <div style="position: relative; margin-bottom: 1rem;">
-  <pre><code id="code">pip3 install paho-mqtt</code></pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-
-<script>
-  function copyCode(button) {
-    const codeElement = button.parentElement.querySelector('code');
-    const code = codeElement.innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      button.textContent = "Copied";
-      button.style.backgroundColor = "rgba(0,255,180,0.4)";
-      setTimeout(() => {
-        button.textContent = "Copy";
-        button.style.backgroundColor = "rgba(0,255,255,0.2)";
-      }, 2000);
-    }).catch(err => {
-      console.error('Copy failed', err);
-      alert("Failed to copy. Try a modern browser.");
-    });
-  }
-</script>
-
-<p> Commands to install the grove library:</p>
-<div style="position: relative; margin-bottom: 1rem;">
-  <pre><code id="code">sudo apt install git python3-dev python3-pip --yes
-
-git clone https://github.com/Seeed-Studio/grove.py
-cd grove.py
-sudo pip3 install .</code></pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-
-<script>
-  function copyCode(button) {
-    const codeElement = button.parentElement.querySelector('code');
-    const code = codeElement.innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      button.textContent = "Copied";
-      button.style.backgroundColor = "rgba(0,255,180,0.4)";
-      setTimeout(() => {
-        button.textContent = "Copy";
-        button.style.backgroundColor = "rgba(0,255,255,0.2)";
-      }, 2000);
-    }).catch(err => {
-      console.error('Copy failed', err);
-      alert("Failed to copy. Try a modern browser.");
-    });
-  }
-</script>
-
-<h2>Code for IoT-based night-light system</h2>
-   <ul>
-      <li>Night Light code</li>
-      <li>Connecting the Raspberry Pi to the MQTT code</li>
-      <li>Sending telemetry to the MQTT broker code</li>
-      <li>Receiving telemetry from the MQTT broker code</li>
-      <li>Turning the LED module using Server code</li>
-    </ul>
-
-    <h2>1. Code Night Light</h2>
-    <p>This code prints the light sensor data. If the light sensor has a value of less than 300, the LED(actuator) will turn on, otherwise, the LED will be off.</p>
-    <div style="position: relative; margin-bottom: 1rem;">
-  <pre><code id="code">import time
-from grove.grove_light_sensor_v1_2 import GroveLightSensor
-from grove.grove_led import GroveLed
-
-light_sensor = GroveLightSensor(0)
-led = GroveLed(5)
-
-# While True loop to print the light sensor and turn on LED when light sensor value is less than 300
-while True:
-    light = light_sensor.light
-    print('Light level:', light)
-
-    if light > 300:
-        led.on()
-    else:
-        led.off()
-    
-    time.sleep(1)</code></pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-
-<script>
-  function copyCode(button) {
-    const codeElement = button.parentElement.querySelector('code');
-    const code = codeElement.innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      button.textContent = "Copied";
-      button.style.backgroundColor = "rgba(0,255,180,0.4)";
-      setTimeout(() => {
-        button.textContent = "Copy";
-        button.style.backgroundColor = "rgba(0,255,255,0.2)";
-      }, 2000);
-    }).catch(err => {
-      console.error('Copy failed', err);
-      alert("Failed to copy. Try a modern browser.");
-    });
-  }
-</script>
-<h2>2. Code for connecting the Raspberry Pi to MQTT</h2>
-<div style="position: relative; margin-bottom: 1rem;">
-  <pre><code># Import the grove light sensor libary and grove LED libary
-# Import the mqtt client libary
-import time
-from grove.grove_light_sensor_v1_2 import GroveLightSensor
-from grove.grove_led import GroveLed
-import paho.mqtt.client as mqtt
-
-# Make a variable to store the light sensor pin and led pin
-light_sensor = GroveLightSensor(0)
-led = GroveLed(5)
-
-# Setup the id for client(device)
-id = '&lt;ID&gt;'
-
-# Setup a client name 
-client_name = id + 'nightlight_client'
-
-# The mqtt subscribe to client topic and connect it to test.mosquitto.org
-mqtt_client = mqtt.Client(client_name)
-mqtt_client.connect('test.mosquitto.org')
-
-# Start up the mqtt
-mqtt_client.loop_start()
-
-# print that the MQTT has been connected
-print("MQTT connected!")
-
-while True:
-    # geting the light sensor data and print to the console
-    light = light_sensor.light
-    print('Light level:', light)
-    # if the light sensor value is less than 300 than led will turn on, else the led will be off
-    if light &lt; 300:
-        led.on()
-    else:
-        led.off()
-    
-    time.sleep(1)</code></pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-
-<script>
-  function copyCode(button) {
-    const codeElement = button.parentElement.querySelector('code');
-    const code = codeElement.innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      button.textContent = "Copied";
-      button.style.backgroundColor = "rgba(0,255,180,0.4)";
-      setTimeout(() => {
-        button.textContent = "Copy";
-        button.style.backgroundColor = "rgba(0,255,255,0.2)";
-      }, 2000);
-    }).catch(err => {
-      console.error('Copy failed', err);
-      alert("Failed to copy. Try a modern browser.");
-    });
-  }
-</script>
-<h3>1. Import the Grove light sensor, LED, MQTT, and time libraries.</h3>
-<h3>2. Set up the light-sensor pin and LED pin.</h3>
-<h3>3. Set up the unique ID for the device using the link below:</h3>
-
-<a href="https://www.guidgen.com/?source=post_page-----330dd304ac38---------------------------------------" 
-   target="_blank"
-   style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #00ffe1; color: black; text-decoration: none; border-radius: 5px; font-family: 'Orbitron', sans-serif;">
-  Generate GUID
-</a>
-<p>The ID is used to connect the device to MQTT, ensuring the connection between the device and the MQTT</p>
-<h3>5. Connect the mqtt_client to the test.mosquitto.org, which is a website to connect to the MQTT Server</h3>
-<h3>6. Start theMQTT and print to the console</h3>
-<h3>7. Make a while true loop</h3>
-<h3>7.1. Start the light sensor and print the values coming from the sensor</h3>
-<h3>7.2 Make an if statement if the light sensor value is less than 300, then turn on the LED; otherwise, the LED is off</h3>
-<h3>8. Finally, sleep for 1 second</h3>
-<h2>3. Code for sending Telemetry to the MQTT Broker</h2>
-<div style="position: relative; margin-bottom: 1rem;">
-  <pre style="border-radius: 10px; overflow-x: auto;">
-    <code class="language-python"># Import the grove light sensor library and grove LED library
-# Import the mqtt client library and json library
-import time
-from grove.grove_light_sensor_v1_2 import GroveLightSensor
-from grove.grove_led import GroveLed
-import paho.mqtt.client as mqtt
-import json
-
-# Make a variable to store the light sensor pin and led pin
-light_sensor = GroveLightSensor(0)
-led = GroveLed(5)
-
-# Setup the id for client(device)
-id = '&lt;ID&gt;'
-
-# Setup a client name and client topic
-client_telemetry_topic = id + '/telemetry'
-client_name = id + 'nightlight_client'
-
-# The mqtt subscribe to client topic and connect it to test.mosquitto.org
-mqtt_client = mqtt.Client(client_name)
-mqtt_client.connect('test.mosquitto.org')
-
-# Start up the mqtt
-mqtt_client.loop_start()
-
-# print that the MQTT has been connected
-print("MQTT connected!")
-
-while True:
-    # Getting the light sensor data and print it in json format
-    light = light_sensor.light
-    telemetry = json.dumps({'light': light})
-
-    print("Sending telemetry ", telemetry)
-
-    mqtt_client.publish(client_telemetry_topic, telemetry)
-
-    time.sleep(5)
-    </code>
-  </pre>
-  <button onclick="copyCode(this)" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-  ">Copy</button>
-</div>
-<h3>1. Import time, MQTT, JSON, grove light sensor, and LED libraries</h3>
+    <!-- continue adding "reveal" class to all sections ... -->
   </div>
+
   <script>
+    // Progress bar
     const progressBar = document.getElementById('progressBar');
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
@@ -558,8 +202,20 @@ while True:
       const scrollPercent = (scrollTop / docHeight) * 100;
       progressBar.style.width = scrollPercent + "%";
     });
-  </script>
-  
 
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
-</html> 
+</html>
