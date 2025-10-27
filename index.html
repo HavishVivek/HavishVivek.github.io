@@ -1,172 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechBytes with Havish</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechBytes with Havish</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle, #1a1a2e, #16213e);
-      overflow-x: hidden;
-    }
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle, #1a1a2e, #16213e);
+            overflow-x: hidden;
+            color: #fff;
+        }
 
-    .background {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      overflow: hidden;
-    }
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
 
-    .line-flow {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
-      background-size: 400% 100%;
-      animation: flowLine 8s linear infinite;
-      z-index: -2;
-    }
+        .line-flow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
+            background-size: 400% 100%;
+            animation: flowLine 8s linear infinite;
+            z-index: -2;
+        }
 
-    @keyframes flowLine {
-      0% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
-    }
+        @keyframes flowLine {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-    }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 0 30px rgba(0,255,255,0.1);
+            animation: fadeIn 1.5s ease-in-out;
+            transition: all 0.6s ease-in-out;
+            padding: 60px 20px 20px 20px;
+            transform: translateY(20px);
+        }
 
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      margin: 20px;
-      box-shadow: 0 0 30px rgba(0,255,255,0.1);
-      animation: fadeIn 1.5s ease-in-out;
-      transition: all 0.6s ease-in-out;
-      padding: 60px 20px 20px 20px;
-       transform: translateY(20px);
-    }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00ffe1;
+            box-shadow: 0 0 20px rgba(0,255,255,0.6);
+            margin-bottom: 20px;
+        }
 
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #00ffe1;
-      box-shadow: 0 0 20px rgba(0,255,255,0.6);
-      margin-bottom: 20px;
-    }
+        h1 {
+            font-size: 2.5rem;
+            color: #00ffe1;
+            text-shadow: 0 0 10px #00ffe1;
+            transition: transform 0.6s ease-in-out;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      color: #00ffe1;
-      text-shadow: 0 0 10px #00ffe1;
-      transition: transform 0.6s ease-in-out;
-    }
+        h1:hover {
+            transform: scale(1.05);
+        }
 
-    h1:hover {
-      transform: scale(1.05);
-    }
+        p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 90%;
+        }
 
-    p {
-      font-size: 1.1rem;
-      color: #ccc;
-      transition: opacity 0.6s ease-in-out;
-      max-width: 90%;
-    }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
 
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(0, 255, 255, 0.2);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
 
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      background: rgba(0, 255, 255, 0.2);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-    }
+        .btn:hover {
+            background: rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
 
-    .btn:hover {
-      background: rgba(0, 255, 255, 0.4);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    }
+        footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 30px;
+        }
 
+        footer div {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
 
-    @keyframes sweep {
-      0% {
-        left: -75%;
-      }
-      100% {
-        left: 125%;
-      }
-    }
-  </style>
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #00ffe1;
+        }
+    </style>
 </head>
-<body>
-  <div class="background">
-    <div class="line-flow"></div>
-  </div>
 
-  <div class="hero sweep-animate">
+<body>
+<div class="background">
+    <div class="line-flow"></div>
+</div>
+
+<div class="hero">
     <img src="./Havish.png" alt="Your Profile Picture" class="profile-pic">
     <h1>Welcome to TechBytes with Havish</h1>
     <p>Explore the latest in Raspberry Pi, Arduino, IoT, AI, and Machine Learning!</p>
     <div class="buttons">
-      <a href="blog.html"><button class="btn">Blog</button></a>
-      <a href="./video.html"><button class="btn">IntelliBlog</button></a>
-      <a href="./projects.html"><button class="btn">Projects</button></a>
+        <a href="blog.html"><button class="btn">Blog</button></a>
+        <a href="./video.html"><button class="btn">IntelliBlog</button></a>
+        <a href="./projects.html"><button class="btn">Projects</button></a>
+        <!-- 🔐 Login Button moved here -->
+        <a href="login.html"><button class="btn">Login</button></a>
     </div>
-  </div>
-  <footer style="background: rgba(255, 255, 255, 0.05); padding: 20px; text-align: center; color: #fff;">
-  <div style="margin-bottom: 10px; font-size: 1.2rem;">Follow me on</div>
-  <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
-    <a href="https://x.com/havish_vivek" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://www.instagram.com/havishvivek/" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.youtube.com/@HavishStudio" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-youtube"></i>
-    </a>
-    <a href="https://medium.com/@havish0624" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-medium"></i>
-    </a>
-    <a href="https://discord.gg/2DzBtVqDue" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-discord"></i>
-    </a>
-  </div>
+</div>
+
+<footer>
+    <div>Follow me on</div>
+    <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
+        <a href="https://x.com/havish_vivek" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/havishvivek/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@HavishStudio" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://medium.com/@havish0624" target="_blank"><i class="fab fa-medium"></i></a>
+        <a href="https://discord.gg/2DzBtVqDue" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
 </footer>
+
 </body>
 </html>
