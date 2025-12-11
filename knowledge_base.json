@@ -1,0 +1,176 @@
+{
+  "version": "1.0",
+  "total_blogs": 3,
+  "blogs": [
+    {
+      "title": "Connecting Raspberry Pi to the Internet in IoT",
+      "html_title": "Connecting Raspberry Pi to the Internet in IoT",
+      "headings": [
+        {
+          "level": "h1",
+          "text": "Connecting Raspberry Pi to the Internet in IoT"
+        },
+        {
+          "level": "h2",
+          "text": "Introduction"
+        },
+        {
+          "level": "h2",
+          "text": "Video for this blog post"
+        },
+        {
+          "level": "h2",
+          "text": "We’ll dive into the following steps:"
+        },
+        {
+          "level": "h2",
+          "text": "What is MQTT and Telemetry"
+        },
+        {
+          "level": "h2",
+          "text": "Prerequisites"
+        },
+        {
+          "level": "h2",
+          "text": "Circuits"
+        }
+      ],
+      "paragraphs": [
+        "In this blog, we explore how to build a simple IoT-based night-light system...",
+        "MQTT is a lightweight protocol designed for IoT..."
+      ],
+      "code_blocks": [],
+      "lists": [
+        {
+          "type": "ul",
+          "items": [
+            "Understanding MQTT and telemetry",
+            "Hardware setup",
+            "Code to control the night light",
+            "Connect Raspberry Pi to MQTT broker",
+            "Receive telemetry and respond"
+          ]
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Raspberry Pi with latest OS",
+            "Grove Base Hat",
+            "Light Sensor",
+            "LED module"
+          ]
+        }
+      ],
+      "tags": [
+        "IoT",
+        "RaspberryPi",
+        "Electronics"
+      ],
+      "full_text": "Connecting Raspberry Pi to the Internet in IoT IoT RaspberryPi Electronics ← Back to Blogs Connecting Raspberry Pi to the Internet in IoT Introduction In this blog, we explore how to build a simple IoT-based night-light system... Video for this blog post We’ll dive into the following steps: Understanding MQTT and telemetry Hardware setup Code to control the night light Connect Raspberry Pi to MQTT broker Receive telemetry and respond What is MQTT and Telemetry MQTT is a lightweight protocol designed for IoT... Prerequisites Raspberry Pi with latest OS Grove Base Hat Light Sensor LED module Circuits Connect the LED to pin D5. Connect the Light Sensor to pin A0.",
+      "file_path": "blog-raspberrypi.html"
+    },
+    {
+      "title": "Setting up Arduino-cli",
+      "html_title": "Connecting Raspberry Pi to the Internet in IoT",
+      "headings": [
+        {
+          "level": "h1",
+          "text": "Setting up Arduino-cli"
+        },
+        {
+          "level": "h2",
+          "text": "Introduction"
+        },
+        {
+          "level": "h2",
+          "text": "Installing Homebrew"
+        },
+        {
+          "level": "h2",
+          "text": "Adding Homebrew to the path"
+        },
+        {
+          "level": "h2",
+          "text": "Adding Homebrew to the path"
+        },
+        {
+          "level": "h3",
+          "text": "To install, run"
+        },
+        {
+          "level": "h1",
+          "text": "To check arduino-cli is installed, run"
+        }
+      ],
+      "paragraphs": [
+        "In this tutorial, let's explore the setup process of Arduino CLI in the Mac OS. The process just takes only 10 minutes",
+        "Open up a terminal window and install homebrew with the following command:"
+      ],
+      "code_blocks": [
+        {
+          "language": "Terminal",
+          "code": "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+        },
+        {
+          "language": "Terminal",
+          "code": "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+        },
+        {
+          "language": "Terminal",
+          "code": "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile"
+        },
+        {
+          "language": "Terminal",
+          "code": "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile"
+        },
+        {
+          "language": "Terminal",
+          "code": "eval \"$(/opt/homebrew/bin/brew shellenv)\""
+        },
+        {
+          "language": "Terminal",
+          "code": "eval \"$(/opt/homebrew/bin/brew shellenv)\""
+        },
+        {
+          "language": "Terminal",
+          "code": "brew install arduino-cli"
+        },
+        {
+          "language": "Terminal",
+          "code": "brew install arduino-cli"
+        },
+        {
+          "language": "Terminal",
+          "code": "arduino-cli -h"
+        },
+        {
+          "language": "Terminal",
+          "code": "arduino-cli -h"
+        }
+      ],
+      "lists": [],
+      "tags": [
+        "IoT",
+        "RaspberryPi",
+        "Electronics"
+      ],
+      "full_text": "Connecting Raspberry Pi to the Internet in IoT IoT RaspberryPi Electronics ← Back to Blogs Setting up Arduino-cli Introduction In this tutorial, let's explore the setup process of Arduino CLI in the Mac OS. The process just takes only 10 minutes Installing Homebrew Open up a terminal window and install homebrew with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboard! Adding Homebrew to the path To install, run Terminal Copy brew install arduino-cli Code copied to clipboard! To check arduino-cli is installed, run Terminal Copy arduino-cli -h Code copied to clipboard!",
+      "file_path": "blog-arduino.html"
+    },
+    {
+      "title": "",
+      "html_title": "",
+      "headings": [],
+      "paragraphs": [],
+      "code_blocks": [],
+      "lists": [],
+      "tags": [],
+      "full_text": "",
+      "file_path": "blog/2025-04-22-IoT.html"
+    }
+  ],
+  "metadata": {
+    "created_at": "/Users/cratebind/Developer/HavishVivek.github.io",
+    "description": "Knowledge base extracted from blog HTML files"
+  }
+}

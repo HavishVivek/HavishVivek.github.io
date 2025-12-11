@@ -1,196 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechBytes with Havish</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle, #1a1a2e, #16213e);
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle, #1a1a2e, #16213e);
+            overflow-x: hidden;
+            color: #fff;
+            min-height: 100vh;
+        }
 
-    .background {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      overflow: hidden;
-    }
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
 
-    .line-flow {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
-      background-size: 400% 100%;
-      animation: flowLine 8s linear infinite;
-      z-index: -2;
-    }
+        .line-flow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
+            background-size: 400% 100%;
+            animation: flowLine 8s linear infinite;
+            z-index: -2;
+        }
 
-    @keyframes flowLine {
-      0% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
-    }
+        @keyframes flowLine {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-    }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
-    .hero {
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #00ffe1;
+            text-shadow: 0 0 20px #00ffe1, 0 0 40px rgba(0,255,225,0.5);
+            margin-bottom: 40px;
+            animation: glow 2s ease-in-out infinite alternate;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ffe1, 0 0 40px rgba(0,255,225,0.5); }
+            to { text-shadow: 0 0 30px #00ffe1, 0 0 60px rgba(0,255,225,0.8); }
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0,255,225,0.3);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px rgba(0,255,255,0.2), inset 0 0 20px rgba(0,255,255,0.05);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-container {
+            margin-bottom: 25px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0,255,225,0.4);
+            border-radius: 30px;
+            outline: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,255,255,0.1);
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .search-bar:focus {
+            border-color: #00ffe1;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 25px rgba(0,255,255,0.3);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            color: #00ffe1;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(0,255,225,0.5);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            border: 2px solid #00ffe1;
+            background: rgba(0,255,225,0.1);
+            color: #00ffe1;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,255,255,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0,255,225,0.2);
+            box-shadow: 0 0 25px rgba(0,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #00ffe1;
+            color: #16213e;
+            box-shadow: 0 0 30px rgba(0,255,255,0.6);
+        }
+
+        #loading {
+            text-align: center;
+            color: #00ffe1;
+            font-size: 1.5em;
+            padding: 60px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        #error {
+            text-align: center;
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        .results-info {
+            text-align: center;
+            color: #00ffe1;
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(0,255,225,0.5);
+            font-weight: 700;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0,255,225,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,255,255,0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 50px rgba(0,255,255,0.5), 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #00ffe1;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0,255,225,0.2);
+            border: 3px solid #00ffe1;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0,255,225,0.4);
+        }
+
+        .video-card:hover .play-button {
+            background: rgba(0,255,225,0.4);
+            box-shadow: 0 0 50px rgba(0,255,225,0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid #00ffe1;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+        }
+
+        .video-channel {
+            font-size: 0.9em;
+            color: #00ffe1;
+            font-weight: 400;
+            text-shadow: 0 0 8px rgba(0,255,225,0.4);
+        }
+
+        .no-results {
+            text-align: center;
+            color: #00ffe1;
+            font-size: 1.5em;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0,255,225,0.3);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                padding: 20px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .filter-buttons {
+                width: 100%;
+            }
+
+            .filter-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+        nav {
+      background: rgba(0, 255, 255, 0.1);
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      margin: 20px;
-      box-shadow: 0 0 30px rgba(0,255,255,0.1);
-      animation: fadeIn 1.5s ease-in-out;
-      transition: all 0.6s ease-in-out;
-      padding: 60px 20px 20px 20px;
-       transform: translateY(20px);
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
     }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #00ffe1;
-      box-shadow: 0 0 20px rgba(0,255,255,0.6);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
+    nav .logo a {
+      font-size: 1.5rem;
       color: #00ffe1;
-      text-shadow: 0 0 10px #00ffe1;
-      transition: transform 0.6s ease-in-out;
+      text-decoration: none;
     }
 
-    h1:hover {
-      transform: scale(1.05);
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #ccc;
-      transition: opacity 0.6s ease-in-out;
-      max-width: 90%;
-    }
-
-    .buttons {
-      margin-top: 20px;
+    nav .nav-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
     }
 
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      background: rgba(0, 255, 255, 0.2);
+    nav .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
       color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: color 0.3s ease;
     }
 
-    .btn:hover {
-      background: rgba(0, 255, 255, 0.4);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    nav .nav-links a:hover {
+      color: #00ffe1;
     }
 
+    footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 30px;
+        }
 
-    @keyframes sweep {
-      0% {
-        left: -75%;
-      }
-      100% {
-        left: 125%;
-      }
-    }
-  </style>
+        footer div {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #00ffe1;
+        }
+    </style>
 </head>
 <body>
-  <div class="background">
-    <div class="line-flow"></div>
-  </div>
-
-  <!-- Blog AI Studio Section -->
-<section id="blog-ai-studio" style="display: flex; flex-wrap: wrap; gap: 2rem; padding: 4rem 2rem; color: white;">
-  <!-- Video Column -->
-  <div style="flex: 2; min-width: 300px;">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #00ffe1; font-family: 'Orbitron', sans-serif;">
-      🎥 Blog AI Studio
-    </h2>
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,255,0.2);">
-      <iframe
-        src="https://www.youtube.com/embed/iZFecB-VRys"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;">
-      </iframe>
+  <nav>
+    <div class="logo">
+      <a href="./index.html">TechBytes</a>
     </div>
-  </div>
-
-  <!-- AI Summary + Chatbot Button -->
-  <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; justify-content: space-between;">
-    <div>
-      <h3 style="font-size: 1.5rem; color: #00ffe1; margin-bottom: 1rem;">🧠 AI Summary</h3>
-      <p style="font-size: 1rem; line-height: 1.6; color: #ccc;">
-        Dive into an AI-generated summary of this video to grasp the key insights instantly. Perfect if you're in a hurry or want a recap!
-      </p>
+    <div class="nav-links">
+      <a href="./index.html">Home</a>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
     </div>
-    <div style="margin-top: 2rem;">
-      <a href="chat.html">
-        <button class="btn" style="width: 100%; font-size: 1rem;">Ask AI About Any Blog</button>
-      </a>
-    </div>
-  </div>
-</section>
+  </nav>
 
-  <footer style="background: rgba(255, 255, 255, 0.05); padding: 20px; text-align: center; color: #fff;">
-  <div style="margin-bottom: 10px; font-size: 1.2rem;">Follow me on</div>
-  <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
-    <a href="https://x.com/havish_vivek" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://www.instagram.com/havishvivek/" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.youtube.com/@HavishStudio" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-youtube"></i>
-    </a>
-    <a href="https://medium.com/@havish0624" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-medium"></i>
-    </a>
-    <a href="https://discord.gg/2DzBtVqDue" target="_blank" style="color: #FFFFFF;">
-      <i class="fab fa-discord"></i>
-    </a>
-  </div>
-</footer>
+    <div class="background">
+        <div class="line-flow"></div>
+    </div>
+
+    <div class="container">
+        <h1>📹 VIDEO GALLERY</h1>
+        
+        <div class="controls">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchBar" 
+                    class="search-bar" 
+                    placeholder="🔍 Search videos by title or channel..."
+                >
+            </div>
+            
+            <div class="filter-container">
+                <span class="filter-label">SORT BY:</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-sort="newest">Newest First</button>
+                    <button class="filter-btn" data-sort="oldest">Oldest First</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading">Loading videos...</div>
+        <div id="error" style="display: none;"></div>
+        <div class="results-info" id="resultsInfo" style="display: none;"></div>
+        <div id="videoContainer" class="video-grid"></div>
+    </div>
+
+    <footer>
+      <div>Follow me on</div>
+      <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
+          <a href="https://x.com/havish_vivek" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/havishvivek/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@HavishStudio" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://medium.com/@havish0624" target="_blank"><i class="fab fa-medium"></i></a>
+          <a href="https://discord.gg/2DzBtVqDue" target="_blank"><i class="fab fa-discord"></i></a>
+      </div>
+  </footer>
+
+    <script>
+        // PASTE YOUR VIDEO IDs HERE (one per line, oldest to newest)
+        const VIDEO_IDS = `
+MkZL-hbHmGA
+LOTfq8eP6lY
+O10ZasbS_GU
+YBImiWxuCB4
+FjJfzv1S4RY
+1x8C_1eKAoo
+O-d03vs8jHQ
+7zLqjz8TBqc
+qDMIPUHMJ_Q
+wRUTm-9aRcE
+AoXLe9nbwyw
+hso1tsPELxI
+QrRET6CvnBw
+wJ8oPJsm9RE
+87lQ51knm3M
+8vqFXcyE1nk
+2og7jTySUs4
+iZFecB-VRys
+rZ3txAetVzQ
+bM6-1g5f70o
+Azp4vFkez9M
+E3v7dCHNULY
+YlQgiJNO7R0
+ELOyDPPHeQI
+H4InDHyM1gA
+DziPP7ZE6ug
+zWjaEimHa_U
+G5u_kiVJCK8
+`;
+
+        let allVideos = [];
+        let currentSort = 'newest';
+        let searchQuery = '';
+
+        async function loadVideos() {
+            try {
+                const videoIds = VIDEO_IDS
+                    .split('\n')
+                    .map(id => id.trim())
+                    .filter(id => id.length > 0);
+
+                if (videoIds.length === 0) {
+                    throw new Error('No video IDs found. Please add video IDs to the VIDEO_IDS variable in the script.');
+                }
+
+                // Fetch video data with index to maintain original order
+                for (let i = 0; i < videoIds.length; i++) {
+                    const videoId = videoIds[i];
+                    try {
+                        const apiResponse = await fetch(
+                            `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`
+                        );
+                        
+                        if (apiResponse.ok) {
+                            const data = await apiResponse.json();
+                            allVideos.push({
+                                id: videoId,
+                                title: data.title,
+                                channel: data.author_name,
+                                thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                                order: i
+                            });
+                        }
+                    } catch (err) {
+                        console.error(`Error fetching video ${videoId}:`, err);
+                    }
+                }
+
+                if (allVideos.length === 0) {
+                    throw new Error('Could not fetch any video data. Please check your video IDs.');
+                }
+
+                document.getElementById('loading').style.display = 'none';
+                displayVideos();
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                const errorDiv = document.getElementById('error');
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = `
+                    <strong>Error loading videos:</strong><br>
+                    ${error.message}
+                `;
+            }
+        }
+
+        function filterAndSortVideos() {
+            let filtered = allVideos;
+
+            if (searchQuery) {
+                filtered = filtered.filter(video => 
+                    video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    video.channel.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            if (currentSort === 'newest') {
+                filtered = [...filtered].sort((a, b) => b.order - a.order);
+            } else {
+                filtered = [...filtered].sort((a, b) => a.order - b.order);
+            }
+
+            return filtered;
+        }
+
+        function displayVideos() {
+            const container = document.getElementById('videoContainer');
+            const resultsInfo = document.getElementById('resultsInfo');
+            container.innerHTML = '';
+
+            const videos = filterAndSortVideos();
+
+            resultsInfo.style.display = 'block';
+            if (searchQuery) {
+                resultsInfo.textContent = `Found ${videos.length} video${videos.length !== 1 ? 's' : ''} matching "${searchQuery}"`;
+            } else {
+                resultsInfo.textContent = `Showing all ${videos.length} video${videos.length !== 1 ? 's' : ''}`;
+            }
+
+            if (videos.length === 0) {
+                container.innerHTML = '<div class="no-results">⚠️ No videos found matching your search.</div>';
+                return;
+            }
+
+            videos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.onclick = () => window.open(`https://www.youtube.com/watch?v=${video.id}`, '_blank');
+
+                card.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-channel">${video.channel}</div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('searchBar').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            displayVideos();
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentSort = e.target.dataset.sort;
+                displayVideos();
+            });
+        });
+
+        loadVideos();
+    </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Chat Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Blog Chat Assistant</h1>
+    <p>Ask questions about any blog post on this site.</p>
+    <div id="chat-container"></div>
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="user-input" placeholder="Ask about a blog...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    
+    <div id="blog-list">
+        <h3>Available Blogs</h3>
+        <ul id="blogs"></ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

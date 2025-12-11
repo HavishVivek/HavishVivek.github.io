@@ -1,0 +1,101 @@
+[
+  {
+    "chunk_id": 0,
+    "blog_id": "blog-raspberrypi.html",
+    "title": "Connecting Raspberry Pi to the Internet in IoT",
+    "text": "Connecting Raspberry Pi to the Internet in IoT IoT RaspberryPi Electronics ← Back to Blogs Connecting Raspberry Pi to the Internet in IoT Introduction In this blog, we explore how to build a simple IoT-based night-light system... Video for this blog post We’ll dive into the following steps: Understanding MQTT and telemetry Hardware setup Code to control the night light Connect Raspberry Pi to MQTT broker Receive telemetry and respond What is MQTT and Telemetry MQTT is a lightweight protocol desi",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 1,
+    "blog_id": "blog-raspberrypi.html",
+    "title": "Connecting Raspberry Pi to the Internet in IoT",
+    "text": "build a simple IoT-based night-light system... Video for this blog post We’ll dive into the following steps: Understanding MQTT and telemetry Hardware setup Code to control the night light Connect Raspberry Pi to MQTT broker Receive telemetry and respond What is MQTT and Telemetry MQTT is a lightweight protocol designed for IoT... Prerequisites Raspberry Pi with latest OS Grove Base Hat Light Sensor LED module Circuits Connect the LED to pin D5. Connect the Light Sensor to pin A0.",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 2,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "Connecting Raspberry Pi to the Internet in IoT IoT RaspberryPi Electronics ← Back to Blogs Setting up Arduino-cli Introduction In this tutorial, let's explore the setup process of Arduino CLI in the Mac OS. The process just takes only 10 minutes Installing Homebrew Open up a terminal window and install homebrew with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 3,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "this tutorial, let's explore the setup process of Arduino CLI in the Mac OS. The process just takes only 10 minutes Installing Homebrew Open up a terminal window and install homebrew with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/home",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 4,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "OS. The process just takes only 10 minutes Installing Homebrew Open up a terminal window and install homebrew with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboa",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 5,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "Homebrew Open up a terminal window and install homebrew with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboard! Adding Homebrew to the path To install, run Termin",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 6,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "with the following command: Terminal Copy /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboard! Adding Homebrew to the path To install, run Terminal Copy brew install arduino-cli Code copied to clipboar",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 7,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "\"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" Code copied to clipboard! Adding Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboard! Adding Homebrew to the path To install, run Terminal Copy brew install arduino-cli Code copied to clipboard! To check arduino-cli is installed, run Terminal Copy",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  },
+  {
+    "chunk_id": 8,
+    "blog_id": "blog-arduino.html",
+    "title": "Setting up Arduino-cli",
+    "text": "Homebrew to the path Terminal Copy echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/[username]/.zprofile Terminal Copy eval \"$(/opt/homebrew/bin/brew shellenv)\" Code copied to clipboard! Code copied to clipboard! Adding Homebrew to the path To install, run Terminal Copy brew install arduino-cli Code copied to clipboard! To check arduino-cli is installed, run Terminal Copy arduino-cli -h Code copied to clipboard!",
+    "tags": [
+      "IoT",
+      "RaspberryPi",
+      "Electronics"
+    ]
+  }
+]
