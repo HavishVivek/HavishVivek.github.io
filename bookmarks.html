@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Bookmarks | TechBytes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAduFJpr2K53fztrdaHpCWULXRHxCqtP-E",
+      authDomain: "havish-studio.firebaseapp.com",
+      projectId: "havish-studio",
+      storageBucket: "havish-studio.firebasestorage.app",
+      messagingSenderId: "139675406404",
+      appId: "1:139675406404:web:ca317c2918943f0b5dec11",
+      measurementId: "G-KNS8JQHTZ4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    let currentUser = null;
+
+    const blogData = {
+      blog1: {
+        title: "Turn ESP32 into a WhatsApp Messenger with CallMeBot",
+        description: "Discover the latest innovations and visual trends in web development and UI/UX.",
+        image: "image3.png",
+        link: "./blog-web.html",
+        category: "Web Development"
+      },
+      blog2: {
+        title: "Connecting Raspberry Pi to the Internet in IoT",
+        description: "Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system using real-world examples.",
+        image: "./pics/mqtt.png",
+        link: "./blog-raspberrypi.html",
+        category: "IoT"
+      },
+      blog3: {
+        title: "Setting up Arduino-cli",
+        description: "How artificial intelligence is reshaping industries and everyday life.",
+        image: "image2.png",
+        link: "blog-arduino.html",
+        category: "AI"
+      }
+    };
+
+    function getBookmarkKey() {
+      return `bookmarks_${currentUser.uid}`;
+    }
+
+    function loadBookmarks() {
+      const bookmarks = JSON.parse(localStorage.getItem(getBookmarkKey()) || '[]');
+      const container = document.getElementById('bookmarksContainer');
+      const emptyState = document.getElementById('emptyState');
+
+      if (bookmarks.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'flex';
+        return;
+      }
+
+      container.style.display = 'flex';
+      emptyState.style.display = 'none';
+      container.innerHTML = '';
+
+      bookmarks.forEach(blogId => {
+        const blog = blogData[blogId];
+        if (blog) {
+          const blogCard = createBookmarkCard(blogId, blog);
+          container.innerHTML += blogCard;
+        }
+      });
+
+      // Add event listeners after creating cards
+      document.querySelectorAll('.remove-bookmark').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const blogId = e.currentTarget.dataset.id;
+          removeBookmark(blogId);
+        });
+      });
+    }
+
+    function createBookmarkCard(id, blog) {
+      return `
+        <div class="bookmark-card" data-id="${id}">
+          <button class="remove-bookmark" data-id="${id}" title="Remove bookmark">
+            <i class="fas fa-times"></i>
+          </button>
+          <img class="bookmark-thumbnail" src="${blog.image}" alt="${blog.title}" />
+          <div class="bookmark-content">
+            <span class="bookmark-category">${blog.category}</span>
+            <h2>${blog.title}</h2>
+            <p>${blog.description}</p>
+            <a href="${blog.link}" class="read-btn">
+              Read Article <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    function removeBookmark(blogId) {
+      const bookmarks = JSON.parse(localStorage.getItem(getBookmarkKey()) || '[]');
+      const index = bookmarks.indexOf(blogId);
+      
+      if (index > -1) {
+        bookmarks.splice(index, 1);
+        localStorage.setItem(getBookmarkKey(), JSON.stringify(bookmarks));
+        showNotification('Bookmark removed');
+        loadBookmarks();
+      }
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 2000);
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        const displayName = user.displayName || user.email.split('@')[0];
+        document.getElementById('userName').textContent = displayName;
+        loadBookmarks();
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at 20% 50%, #1a1a2e 0%, #16213e 50%, #0f1419 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+    }
+
+    #notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 255, 225, 0.2);
+      border: 2px solid rgba(0, 255, 225, 0.5);
+      color: #00ffe1;
+      padding: 15px 25px;
+      border-radius: 15px;
+      display: none;
+      z-index: 2000;
+      animation: slideInRight 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 255, 225, 0.3);
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header h1 {
+      color: #00ffe1;
+      font-size: 2.5rem;
+      text-shadow: 0 0 20px rgba(0, 255, 225, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-greeting {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .back-btn {
+      padding: 12px 24px;
+      background: rgba(0, 255, 225, 0.2);
+      border: 2px solid rgba(0, 255, 225, 0.4);
+      border-radius: 25px;
+      color: #00ffe1;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background: rgba(0, 255, 225, 0.3);
+      transform: translateX(-5px);
+      box-shadow: 0 0 15px rgba(0, 255, 225, 0.3);
+    }
+
+    #bookmarksContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .bookmark-card {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 255, 225, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 255, 225, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .bookmark-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0, 255, 225, 0.2);
+      border-color: rgba(0, 255, 225, 0.4);
+    }
+
+    .remove-bookmark {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 107, 107, 0.2);
+      border: 2px solid rgba(255, 107, 107, 0.4);
+      color: #ff6b6b;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .remove-bookmark:hover {
+      background: rgba(255, 107, 107, 0.4);
+      border-color: #ff6b6b;
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .bookmark-thumbnail {
+      width: 280px;
+      height: 200px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .bookmark-content {
+      padding: 25px 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bookmark-category {
+      display: inline-block;
+      background: rgba(0, 255, 225, 0.2);
+      color: #00ffe1;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .bookmark-content h2 {
+      color: #00ffe1;
+      font-size: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .bookmark-content p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #00ffe1 0%, #00b8a9 100%);
+      color: #0f1419;
+      border: none;
+      border-radius: 25px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .read-btn:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 20px rgba(0, 255, 225, 0.4);
+    }
+
+    #emptyState {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .empty-icon {
+      font-size: 5rem;
+      color: rgba(0, 255, 225, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .empty-title {
+      color: #00ffe1;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .empty-text {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+
+    .browse-btn {
+      padding: 15px 35px;
+      background: linear-gradient(135deg, #00ffe1 0%, #00b8a9 100%);
+      color: #0f1419;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .browse-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 255, 225, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .bookmark-card {
+        flex-direction: column;
+      }
+
+      .bookmark-thumbnail {
+        width: 100%;
+        height: 200px;
+      }
+
+      .bookmark-content {
+        padding: 20px;
+      }
+
+      .remove-bookmark {
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="notification"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <h1>
+        <i class="fas fa-bookmark"></i>
+        My Bookmarks
+      </h1>
+      <p class="user-greeting">Welcome back, <span id="userName">User</span>!</p>
+    </div>
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+  </div>
+
+  <div id="bookmarksContainer"></div>
+
+  <div id="emptyState">
+    <div class="empty-icon">
+      <i class="fas fa-bookmark"></i>
+    </div>
+    <h2 class="empty-title">No Bookmarks Yet</h2>
+    <p class="empty-text">
+      You haven't bookmarked any articles yet. Start exploring our blog posts and save your favorites for later!
+    </p>
+    <a href="index.html" class="browse-btn">
+      <i class="fas fa-compass"></i>
+      Browse Articles
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

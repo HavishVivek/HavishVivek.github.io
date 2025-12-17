@@ -6,6 +6,115 @@
   <title>TechBytes Blog</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAduFJpr2K53fztrdaHpCWULXRHxCqtP-E",
+      authDomain: "havish-studio.firebaseapp.com",
+      projectId: "havish-studio",
+      storageBucket: "havish-studio.firebasestorage.app",
+      messagingSenderId: "139675406404",
+      appId: "1:139675406404:web:ca317c2918943f0b5dec11",
+      measurementId: "G-KNS8JQHTZ4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    let currentUser = null;
+
+    onAuthStateChanged(auth, (user) => {
+      const userNameDisplay = document.getElementById('userNameDisplay');
+      const userDropdown = document.querySelector('.user-dropdown');
+      
+      if (user) {
+        currentUser = user;
+        const displayName = user.displayName || user.email.split('@')[0];
+        userNameDisplay.textContent = displayName;
+        userDropdown.style.display = 'block';
+        loadBookmarks();
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Bookmark functions
+    function getBookmarkKey() {
+      return `bookmarks_${currentUser.uid}`;
+    }
+
+    function loadBookmarks() {
+      const bookmarks = JSON.parse(localStorage.getItem(getBookmarkKey()) || '[]');
+      document.querySelectorAll('.blog-post').forEach(post => {
+        const postId = post.dataset.id;
+        const bookmarkBtn = post.querySelector('.bookmark-btn');
+        if (bookmarks.includes(postId)) {
+          bookmarkBtn.classList.add('bookmarked');
+        }
+      });
+      updateBookmarkCount();
+    }
+
+    function toggleBookmark(postId) {
+      const bookmarks = JSON.parse(localStorage.getItem(getBookmarkKey()) || '[]');
+      const index = bookmarks.indexOf(postId);
+      const bookmarkBtn = document.querySelector(`[onclick="toggleBookmark('${postId}')"]`);
+      
+      if (index > -1) {
+        bookmarks.splice(index, 1);
+        bookmarkBtn.classList.remove('bookmarked');
+        showNotification('Bookmark removed');
+      } else {
+        bookmarks.push(postId);
+        bookmarkBtn.classList.add('bookmarked');
+        showNotification('Bookmark added');
+      }
+      
+      localStorage.setItem(getBookmarkKey(), JSON.stringify(bookmarks));
+      updateBookmarkCount();
+    }
+
+    function updateBookmarkCount() {
+      const bookmarks = JSON.parse(localStorage.getItem(getBookmarkKey()) || '[]');
+      const countBadge = document.getElementById('bookmarkCount');
+      if (bookmarks.length > 0) {
+        countBadge.textContent = bookmarks.length;
+        countBadge.style.display = 'flex';
+      } else {
+        countBadge.style.display = 'none';
+      }
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 2000);
+    }
+
+    window.toggleBookmark = toggleBookmark;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          try {
+            await signOut(auth);
+            window.location.href = 'login.html';
+          } catch (error) {
+            console.error('Logout error:', error);
+          }
+        });
+      }
+    });
+  </script>
+  
   <style>
     body {
       margin: 0;
@@ -15,6 +124,32 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+    }
+
+    #notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: rgba(0, 255, 225, 0.2);
+      border: 2px solid rgba(0, 255, 225, 0.5);
+      color: #00ffe1;
+      padding: 15px 25px;
+      border-radius: 15px;
+      display: none;
+      z-index: 2000;
+      animation: slideInRight 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 255, 225, 0.3);
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     nav {
@@ -38,19 +173,119 @@
 
     nav .nav-links {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      gap: 30px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     nav .nav-links a {
-      margin-left: 20px;
       text-decoration: none;
       color: #fff;
       transition: color 0.3s ease;
+      font-size: 1rem;
     }
 
     nav .nav-links a:hover {
       color: #00ffe1;
+    }
+
+    .user-dropdown {
+      position: relative;
+      display: none;
+    }
+
+    .user-name-btn {
+      background: rgba(0, 255, 255, 0.2);
+      border: 2px solid rgba(0, 255, 255, 0.4);
+      color: #00ffe1;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-name-btn:hover {
+      background: rgba(0, 255, 255, 0.3);
+      border-color: #00ffe1;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .user-name-btn i {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .user-dropdown:hover .user-name-btn i,
+    .user-dropdown.active .user-name-btn i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: rgba(22, 33, 62, 0.95);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(0, 255, 255, 0.3);
+      border-radius: 15px;
+      min-width: 200px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .user-dropdown:hover .dropdown-menu,
+    .user-dropdown.active .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 20px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 255, 0.1);
+      color: #00ffe1;
+      padding-left: 25px;
+    }
+
+    .dropdown-menu a i {
+      font-size: 1.1rem;
+      width: 20px;
+    }
+
+    .bookmark-count {
+      position: absolute;
+      right: 15px;
+      background: #00ffe1;
+      color: #0f1419;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 7px;
+      border-radius: 10px;
+      display: none;
     }
 
     h1 {
@@ -100,10 +335,54 @@
       overflow: hidden;
       box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
     .blog-post.reverse {
       flex-direction: row-reverse;
+    }
+
+    .bookmark-btn {
+      background: rgba(22, 33, 62, 0.9);
+      border: 2px solid rgba(0, 255, 225, 0.3);
+      color: rgba(255, 255, 255, 0.6);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    .bookmark-btn:hover {
+      background: rgba(0, 255, 225, 0.2);
+      border-color: #00ffe1;
+      color: #00ffe1;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0, 255, 225, 0.4);
+    }
+
+    .bookmark-btn.bookmarked {
+      background: rgba(0, 255, 225, 0.3);
+      border-color: #00ffe1;
+      color: #00ffe1;
+    }
+
+    .bookmark-btn.bookmarked:hover {
+      background: rgba(0, 255, 225, 0.4);
+    }
+
+    .bookmark-btn i {
+      font-size: 1.2rem;
+    }
+
+    .blog-post.reverse .bookmark-btn {
+      margin-left: 12px;
     }
 
     .blog-thumbnail {
@@ -125,6 +404,8 @@
     .blog-content h2 {
       color: #00ffe1;
       margin: 0 0 10px;
+      display: flex;
+      align-items: center;
     }
 
     .blog-content p {
@@ -168,7 +449,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Desktop hover breathing animation */
     @media (hover: hover) {
       .blog-post:hover {
         animation: breathe 1.5s ease-in-out infinite;
@@ -177,28 +457,39 @@
       }
     }
 
-    /* Mobile touch breathing animation */
     .blog-post.touch-breathe {
       animation: breathe 1.5s ease-in-out 3;
       box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
       z-index: 1;
     }
 
+    @media (max-width: 1024px) {
+      nav .nav-links {
+        position: static;
+        transform: none;
+        margin: 10px 0;
+      }
+    }
+
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         padding: 15px 20px;
       }
 
-      nav .nav-links {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
+      nav .logo {
+        margin-bottom: 10px;
       }
 
-      nav .nav-links a {
-        margin: 8px 0;
+      nav .nav-links {
+        flex-direction: row;
+        gap: 15px;
+        margin: 10px 0;
+      }
+
+      .user-dropdown {
+        margin-top: 10px;
       }
 
       .blog-post,
@@ -208,6 +499,11 @@
 
       .blog-thumbnail {
         max-width: 100%;
+      }
+
+      .bookmark-btn,
+      .blog-post.reverse .bookmark-btn {
+        margin-left: 12px;
       }
 
       .read-more-wrapper {
@@ -224,18 +520,53 @@
         padding: 10px 20px;
       }
     }
+
+    @media (max-width: 480px) {
+      nav .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+
+<div id="notification"></div>
+
 <nav>
   <div class="logo">
     <a href="./index.html">TechBytes</a>
   </div>
   <div class="nav-links">
     <a href="./index.html">Home</a>
-    <a href="#">About</a>
     <a href="#">Blog</a>
-    <a href="#">Contact</a>
+    <a href="#">About</a>
+  </div>
+  <div class="user-dropdown">
+    <button class="user-name-btn">
+      <span id="userNameDisplay">User</span>
+      <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="dropdown-menu">
+      <a href="#ai-chat">
+        <i class="fas fa-robot"></i>
+        <span>AI Chat</span>
+      </a>
+      <a href="bookmarks.html">
+        <i class="fas fa-bookmark"></i>
+        <span>Bookmarked Blogs</span>
+        <span class="bookmark-count" id="bookmarkCount">0</span>
+      </a>
+      <a href="settings.html">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+      <a href="#logout" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -249,10 +580,15 @@
 </div>
 
 <div class="container">
-  <div class="blog-post reverse" data-category="web">
+  <div class="blog-post reverse" data-category="web" data-id="blog1">
     <img class="blog-thumbnail" src="image3.png" alt="Web blog image" />
     <div class="blog-content">
-      <h2>Turn ESP32 into a WhatsApp Messenger with CallMeBot</h2>
+      <h2>
+        Turn ESP32 into a WhatsApp Messenger with CallMeBot
+        <button class="bookmark-btn" onclick="toggleBookmark('blog1')">
+          <i class="fas fa-bookmark"></i>
+        </button>
+      </h2>
       <p>Discover the latest innovations and visual trends in web development and UI/UX.</p>
       <div class="read-more-wrapper">
         <a class="read-more-btn" href="./blog-web.html">Read More →</a>
@@ -260,27 +596,35 @@
     </div>
   </div>
 
-  <div class="blog-post" data-category="iot RaspberryPi">
+  <div class="blog-post" data-category="iot RaspberryPi" data-id="blog2">
     <img class="blog-thumbnail" src="./pics/mqtt.png" alt="IoT blog image" />
     <div class="blog-content">
-      <h2>Connecting Raspberry Pi to the Internet in IoT</h2>
+      <h2>
+        Connecting Raspberry Pi to the Internet in IoT
+        <button class="bookmark-btn" onclick="toggleBookmark('blog2')">
+          <i class="fas fa-bookmark"></i>
+        </button>
+      </h2>
       <p>Learn how to connect your Raspberry Pi to an MQTT broker and build an IoT night-light system using real-world examples.</p>
       <div class="read-more-wrapper">
-        <a class="read-more-btn" href="blog-raspberrypi.html">Read More →</a>
+        <a class="read-more-btn" href="/blog/blog-raspberrypi.html">Read More →</a>
       </div>
     </div>
   </div>
 
-  <div class="blog-post reverse" data-category="ai">
+  <div class="blog-post reverse" data-category="ai" data-id="blog3">
     <img class="blog-thumbnail" src="image2.png" alt="AI blog image" />
     <div class="blog-content">
-      <h2>Setting up Arduino-cli</h2>
+      <h2>
+        Setting up Arduino-cli
+        <button class="bookmark-btn" onclick="toggleBookmark('blog3')">
+          <i class="fas fa-bookmark"></i>
+        </button>
+      </h2>
       <p>How artificial intelligence is reshaping industries and everyday life.</p>
       <div class="read-more-wrapper">
         <a class="read-more-btn" href="blog-arduino.html">Read More →</a>
       </div>
-    </div>
-  </div>
     </div>
   </div>
 </div>
@@ -307,14 +651,32 @@
     });
   });
 
-  // Mobile breathing animation on touch
   posts.forEach(post => {
     post.addEventListener('touchstart', () => {
       post.classList.add('touch-breathe');
       setTimeout(() => {
         post.classList.remove('touch-breathe');
-      }, 4500); // 1.5s * 3 loops
+      }, 4500);
     });
+  });
+
+  // Mobile dropdown toggle
+  const userDropdown = document.querySelector('.user-dropdown');
+  const userNameBtn = document.querySelector('.user-name-btn');
+  
+  if (userNameBtn) {
+    userNameBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('active');
+    });
+  }
+
+  document.addEventListener('click', () => {
+    userDropdown.classList.remove('active');
+  });
+
+  userDropdown?.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 </script>
 
