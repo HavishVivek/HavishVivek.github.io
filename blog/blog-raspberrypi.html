@@ -153,7 +153,7 @@
     <h1 class="reveal">Connecting Raspberry Pi to the Internet in IoT</h1>
 
     <h2 class="reveal">Introduction</h2>
-    <p class="reveal">In this blog, we explore how to build a simple IoT-based night-light system...</p>
+    <p class="reveal">In this blog, we explore how to build a simple IoT-based night-light system using a Raspberry Pi and the MQTT protocol. MQTT(Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT applications, especially when transmitting telemetry data like sensor readings or control signals between devices.</p>
 
     <h2 class="reveal">Video for this blog post</h2>
     <div class="video-container reveal">
@@ -163,14 +163,16 @@
     <h2 class="reveal">We’ll dive into the following steps:</h2>
     <ul class="reveal">
         <li>Understanding MQTT and telemetry</li>
-        <li>Hardware setup</li>
-        <li>Code to control the night light</li>
-        <li>Connect Raspberry Pi to MQTT broker</li>
-        <li>Receive telemetry and respond</li>
+        <li>The hardware setup for the night light</li>
+        <li>The code that controls the night light</li>
+        <li>Steps to connect the Raspberry Pi to an MQTT broker</li>
+        <li>How the Raspberry Pi can receive telemetry messages and respond accordingly, like turning the night light on or off</li>
     </ul>
 
     <h2 class="reveal">What is MQTT and Telemetry</h2>
-    <p class="reveal">MQTT is a lightweight protocol designed for IoT...</p>
+    <p class="reveal">MQTT is a lightweight and open-source messaging protocol designed for small, low-power devices. It has a feature that allows for machine-to-machine communication. It works on a publish/subscribe model, where devices (clients) can send (publish) messages or receive (subscribe) messages through a central server known as the broker. Because of MQTT’s very little bandwidth and power to send the data, it’s perfect for Internet of Things (IoT) applications where devices like sensors and microcontrollers need to exchange information efficiently.</p>
+    <p class="reveal">Telemetry is a process of collecting data from remote sensors or devices transmitting to another system-usually a cloud platform, for monitoring, analysis, or decision-making. In the context of IoT, telemetry allows devices like temperature sensors, motion detectors, or smart appliances to continuously send data to the cloud, where it can be stored, visualized, and acted upon.</p>
+    <p class="reveal">Together, MQTT and telemetry make it possible for smart devices to stay connected, share real-time data, and power intelligent systems-from smart homes to industrial automation and even large-scale AI-driven applications</p>
 
     <h2 class="reveal">Prerequisites</h2>
     <ul class="reveal">
@@ -182,11 +184,11 @@
 
     <h2 class="reveal">Circuits</h2>
     <figure class="reveal">
-        <img src="./pics/LED.png" alt="LED Circuit">
+        <img src="../pics/LED.png" alt="LED Circuit">
         <figcaption>Connect the LED to pin D5.</figcaption>
     </figure>
     <figure class="reveal">
-        <img src="./pics/lightSensor.png" alt="Light Sensor">
+        <img src="../pics/lightSensor.png" alt="Light Sensor">
         <figcaption>Connect the Light Sensor to pin A0.</figcaption>
     </figure>
 
