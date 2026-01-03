@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connecting Raspberry Pi to the Internet in IoT</title>
+    <title>Setting up Arduino-cli</title>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -41,9 +41,10 @@
             margin-top: 60px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
+            margin-bottom: 100px;
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             color: white;
             font-family: 'General Sans', sans-serif;
             font-weight: 600;
@@ -476,8 +477,8 @@
     <div class="top-bar">
         <div class="tags">
             <div class="tag">IoT</div>
-            <div class="tag">RaspberryPi</div>
-            <div class="tag">Electronics</div>
+            <div class="tag">Arduino</div>
+            <div class="tag">CLI</div>
         </div>
         <a href="./blog.html" class="back-btn">← Back to Blogs</a>
     </div>
@@ -489,12 +490,12 @@
 
     <h2 class="reveal">Installing Homebrew</h2>
     <p class="reveal">Open up a terminal window and install homebrew with the following command:</p>
-    <!-- Code Block Structure -->
+    
     <div class="code-block reveal">
         <div class="code-header">
-            <span class="code-language"><i class="fas fa-terminal"></i> Terminal</span>
+            <span class="code-language">Terminal</span>
             <button class="copy-btn" onclick="copyCode(this, 'code1')">
-                <i class="far fa-copy"></i> Copy
+                Copy
             </button>
         </div>
         <div class="code-content">
@@ -502,92 +503,66 @@
         </div>
     </div>
 
-    <!-- Toast Notification (add once to body) -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Code copied to clipboard!</span>
-    </div>
-
     <h2 class="reveal">Adding Homebrew to the path</h2>
-    <!-- Code Block Structure -->
+    
     <div class="code-block reveal">
         <div class="code-header">
-            <span class="code-language"><i class="fas fa-terminal"></i> Terminal</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code1')">
-                <i class="far fa-copy"></i> Copy
+            <span class="code-language">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this, 'code2')">
+                Copy
             </button>
         </div>
         <div class="code-content">
-            <pre><code id="code1">echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/[username]/.zprofile</code></pre>
+            <pre><code id="code2">echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/[username]/.zprofile</code></pre>
         </div>
     </div>
-    <!-- Code Block Structure -->
+    
     <div class="code-block reveal">
         <div class="code-header">
-            <span class="code-language"><i class="fas fa-terminal"></i> Terminal</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code1')">
-                <i class="far fa-copy"></i> Copy
+            <span class="code-language">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this, 'code3')">
+                Copy
             </button>
         </div>
         <div class="code-content">
-            <pre><code id="code1">eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
+            <pre><code id="code3">eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
         </div>
     </div>
 
-    <!-- Toast Notification (add once to body) -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Code copied to clipboard!</span>
-    </div>
-
-    <!-- Toast Notification (add once to body) -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Code copied to clipboard!</span>
-    </div>
-
-    <h2 class="reveal">Adding Homebrew to the path</h2>
+    <h2 class="reveal">Installing arduino-cli</h2>
     <h3 class="reveal">To install, run</h3>
-    <!-- Code Block Structure -->
+    
     <div class="code-block reveal">
         <div class="code-header">
-            <span class="code-language"><i class="fas fa-terminal"></i> Terminal</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code1')">
-                <i class="far fa-copy"></i> Copy
+            <span class="code-language">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this, 'code4')">
+                Copy
             </button>
         </div>
         <div class="code-content">
-            <pre><code id="code1">brew install arduino-cli</code></pre>
+            <pre><code id="code4">brew install arduino-cli</code></pre>
         </div>
     </div>
 
-    <!-- Toast Notification (add once to body) -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Code copied to clipboard!</span>
-    </div>
-
-    <h1 class="reveal">To check arduino-cli is installed, run</h1>
-    <!-- Code Block Structure -->
+    <h2 class="reveal">To check arduino-cli is installed, run</h2>
+    
     <div class="code-block reveal">
         <div class="code-header">
-            <span class="code-language"><i class="fas fa-terminal"></i> Terminal</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code1')">
-                <i class="far fa-copy"></i> Copy
+            <span class="code-language">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this, 'code5')">
+                Copy
             </button>
         </div>
         <div class="code-content">
-            <pre><code id="code1">arduino-cli -h</code></pre>
+            <pre><code id="code5">arduino-cli -h</code></pre>
         </div>
     </div>
 
-    <!-- Toast Notification (add once to body) -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Code copied to clipboard!</span>
-    </div>
+</div>
 
-    <!-- continue adding "reveal" class to all sections ... -->
+<!-- Toast Notification (ONLY ONE at the end) -->
+<div class="toast" id="toast">
+    <span>✓ Code copied to clipboard!</span>
 </div>
 
 <!-- Chat Widget -->
@@ -667,7 +642,7 @@
         navigator.clipboard.writeText(code).then(() => {
             // Change button state
             const originalHTML = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.innerHTML = '✓ Copied!';
             button.classList.add('copied');
 
             // Show toast notification
@@ -687,165 +662,177 @@
     }
 
     // Configuration
-    const API_URL = 'https://b8c2f58df8f2.ngrok-free.app';
+    const API_URL = 'https://41227342de8e.ngrok-free.app';
         
-        // DOM Elements
-        const toggleBtn = document.getElementById('qaToggleBtn');
-        const closeBtn = document.getElementById('qaCloseBtn');
-        const chatWindow = document.getElementById('qaChatWindow');
-        const chatMessages = document.getElementById('qaChatMessages');
-        const chatInput = document.getElementById('qaChatInput');
-        const sendBtn = document.getElementById('qaSendBtn');
-        const filterBtns = document.querySelectorAll('.qa-filter-btn');
+    // DOM Elements
+    const toggleBtn = document.getElementById('qaToggleBtn');
+    const closeBtn = document.getElementById('qaCloseBtn');
+    const chatWindow = document.getElementById('qaChatWindow');
+    const chatMessages = document.getElementById('qaChatMessages');
+    const chatInput = document.getElementById('qaChatInput');
+    const sendBtn = document.getElementById('qaSendBtn');
+    const filterBtns = document.querySelectorAll('.qa-filter-btn');
 
-        let currentFilter = 'all';
+    let currentFilter = 'all';
 
-        // Toggle chat window
+    // Toggle chat window
+    if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             chatWindow.classList.add('open');
         });
+    }
 
+    if (closeBtn) {
         closeBtn.addEventListener('click', () => {
             chatWindow.classList.remove('open');
         });
+    }
 
-        // Filter buttons
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-            });
+    // Filter buttons
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
         });
+    });
 
-        // Add message to chat
-        function addMessage(text, isUser = false, sources = null) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `qa-message ${isUser ? 'user' : 'bot'}`;
+    // Add message to chat
+    function addMessage(text, isUser = false, sources = null) {
+        if (!chatMessages) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `qa-message ${isUser ? 'user' : 'bot'}`;
+        
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = 'qa-message-bubble';
+        bubbleDiv.textContent = text;
+        
+        messageDiv.appendChild(bubbleDiv);
+        
+        if (sources && sources.length > 0) {
+            const sourcesDiv = document.createElement('div');
+            sourcesDiv.className = 'qa-sources';
+            sourcesDiv.innerHTML = '<strong>Sources:</strong><br>';
             
-            const bubbleDiv = document.createElement('div');
-            bubbleDiv.className = 'qa-message-bubble';
-            bubbleDiv.textContent = text;
+            sources.forEach(source => {
+                const sourceItem = document.createElement('div');
+                sourceItem.className = 'qa-source-item';
+                sourceItem.textContent = `${source.type === 'video' ? '🎥' : '📄'} ${source.title}`;
+                sourcesDiv.appendChild(sourceItem);
+            });
             
-            messageDiv.appendChild(bubbleDiv);
+            messageDiv.appendChild(sourcesDiv);
+        }
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Add loading indicator
+    function addLoading() {
+        if (!chatMessages) return;
+        
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'qa-message bot';
+        loadingDiv.id = 'qa-loading';
+        loadingDiv.innerHTML = `
+            <div class="qa-loading">
+                <div class="qa-loading-dot"></div>
+                <div class="qa-loading-dot"></div>
+                <div class="qa-loading-dot"></div>
+            </div>
+        `;
+        chatMessages.appendChild(loadingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeLoading() {
+        const loading = document.getElementById('qa-loading');
+        if (loading) loading.remove();
+    }
+
+    // Send question to API
+    async function askQuestion(question) {
+        if (!question.trim()) return;
+        
+        addMessage(question, true);
+        if (chatInput) chatInput.value = '';
+        if (sendBtn) sendBtn.disabled = true;
+        
+        addLoading();
+        
+        try {
+            const filter = currentFilter === 'all' ? null : currentFilter;
             
-            if (sources && sources.length > 0) {
-                const sourcesDiv = document.createElement('div');
-                sourcesDiv.className = 'qa-sources';
-                sourcesDiv.innerHTML = '<strong>Sources:</strong><br>';
-                
-                sources.forEach(source => {
-                    const sourceItem = document.createElement('div');
-                    sourceItem.className = 'qa-source-item';
-                    sourceItem.textContent = `${source.type === 'video' ? '🎥' : '📄'} ${source.title}`;
-                    sourcesDiv.appendChild(sourceItem);
-                });
-                
-                messageDiv.appendChild(sourcesDiv);
+            const response = await fetch(`${API_URL}/ask`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    question: question,
+                    filter: filter
+                })
+            });
+            
+            const data = await response.json();
+            
+            removeLoading();
+            
+            if (data.success) {
+                addMessage(data.answer, false, data.sources);
+            } else {
+                addMessage('Sorry, I encountered an error: ' + data.error, false);
             }
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } catch (error) {
+            removeLoading();
+            addMessage('Sorry, I could not connect to the server. Please try again.', false);
         }
+        
+        if (sendBtn) sendBtn.disabled = false;
+        if (chatInput) chatInput.focus();
+    }
 
-        // Add loading indicator
-        function addLoading() {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'qa-message bot';
-            loadingDiv.id = 'qa-loading';
-            loadingDiv.innerHTML = `
-                <div class="qa-loading">
-                    <div class="qa-loading-dot"></div>
-                    <div class="qa-loading-dot"></div>
-                    <div class="qa-loading-dot"></div>
-                </div>
-            `;
-            chatMessages.appendChild(loadingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function removeLoading() {
-            const loading = document.getElementById('qa-loading');
-            if (loading) loading.remove();
-        }
-
-        // Send question to API
-        async function askQuestion(question) {
-            if (!question.trim()) return;
-            
-            addMessage(question, true);
-            chatInput.value = '';
-            sendBtn.disabled = true;
-            
-            addLoading();
-            
-            try {
-                const filter = currentFilter === 'all' ? null : currentFilter;
-                
-                const response = await fetch(`${API_URL}/ask`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        question: question,
-                        filter: filter
-                    })
-                });
-                
-                const data = await response.json();
-                
-                removeLoading();
-                
-                if (data.success) {
-                    addMessage(data.answer, false, data.sources);
-                } else {
-                    addMessage('Sorry, I encountered an error: ' + data.error, false);
-                }
-            } catch (error) {
-                removeLoading();
-                addMessage('Sorry, I could not connect to the server. Please try again.', false);
-            }
-            
-            sendBtn.disabled = false;
-            chatInput.focus();
-        }
-
-        // Event listeners
+    // Event listeners
+    if (sendBtn) {
         sendBtn.addEventListener('click', () => {
             askQuestion(chatInput.value);
         });
+    }
 
+    if (chatInput) {
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 askQuestion(chatInput.value);
             }
         });
+    }
 
-        // Auto-learn from current page (optional)
-        async function learnFromCurrentPage() {
-            try {
-                const response = await fetch(`${API_URL}/learn/blog`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        html: document.documentElement.outerHTML,
-                        title: document.title
-                    })
-                });
-                
-                const data = await response.json();
-                console.log('Learned from page:', data);
-            } catch (error) {
-                console.error('Failed to learn from page:', error);
-            }
+    // Auto-learn from current page (optional)
+    async function learnFromCurrentPage() {
+        try {
+            const response = await fetch(`${API_URL}/learn/blog`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    html: document.documentElement.outerHTML,
+                    title: document.title
+                })
+            });
+            
+            const data = await response.json();
+            console.log('Learned from page:', data);
+        } catch (error) {
+            console.error('Failed to learn from page:', error);
         }
+    }
 
-        // Optional: Automatically learn from the current page when widget loads
-        // Uncomment the line below to enable auto-learning
-        // learnFromCurrentPage()
+    // Optional: Automatically learn from the current page when widget loads
+    // Uncomment the line below to enable auto-learning
+    // learnFromCurrentPage()
 </script>
 </body>
 </html>

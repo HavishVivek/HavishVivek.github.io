@@ -14,127 +14,316 @@
         body {
             margin: 0;
             font-family: 'Orbitron', sans-serif;
-            background: radial-gradient(circle, #1a1a2e, #16213e);
+            background: #000;
             overflow-x: hidden;
             color: #fff;
         }
 
+        /* 🌌 Animated Starfield Background */
         .background {
             position: fixed;
             width: 100%;
             height: 100%;
             z-index: -2;
             overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
         }
 
+        /* Floating particles */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Gradient flowing lines */
         .line-flow {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(0,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(0,255,255,0.05) 75%);
-            background-size: 400% 100%;
-            animation: flowLine 8s linear infinite;
-            z-index: -2;
+            background: 
+                linear-gradient(90deg, transparent, rgba(0,255,255,0.03), transparent),
+                linear-gradient(0deg, transparent, rgba(255,0,255,0.03), transparent);
+            background-size: 200% 200%;
+            animation: flowLine 15s ease-in-out infinite;
+            z-index: -1;
         }
 
         @keyframes flowLine {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
+        /* Orbiting particles */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            border: 1px solid rgba(0,255,255,0.1);
+            border-radius: 50%;
+            animation: rotate 30s linear infinite;
+        }
+
+        .orbit::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #00ffe1;
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px #00ffe1;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Hero section with glass morphism */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 0 30px rgba(0,255,255,0.1);
-            animation: fadeIn 1.5s ease-in-out;
-            transition: all 0.6s ease-in-out;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            margin: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2);
+            animation: heroFloat 6s ease-in-out infinite;
             padding: 60px 20px 20px 20px;
-            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent 30%
+            );
+            animation: rotate 10s linear infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: radial-gradient(circle at center, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+            border-radius: 27px;
+            z-index: -1;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Profile picture with holographic effect */
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #00ffe1;
-            box-shadow: 0 0 20px rgba(0,255,255,0.6);
+            box-shadow: 
+                0 0 30px rgba(0,255,255,0.6),
+                0 0 60px rgba(0,255,255,0.4),
+                inset 0 0 20px rgba(0,255,255,0.2);
             margin-bottom: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+            animation: profileGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes profileGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(0,255,255,0.6),
+                    0 0 60px rgba(0,255,255,0.4),
+                    inset 0 0 20px rgba(0,255,255,0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(255,0,255,0.6),
+                    0 0 80px rgba(255,0,255,0.4),
+                    inset 0 0 30px rgba(255,0,255,0.2);
+            }
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #00ffe1;
-            text-shadow: 0 0 10px #00ffe1;
-            transition: transform 0.6s ease-in-out;
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, #00ffe1, #ff00ff, #00ffe1);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease infinite;
+            text-shadow: 0 0 30px rgba(0,255,255,0.5);
+            position: relative;
+            z-index: 1;
+            margin: 10px 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         h1:hover {
             transform: scale(1.05);
+            transition: transform 0.3s ease;
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #ccc;
             max-width: 90%;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons with neon effect */
         .buttons {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            background: rgba(0, 255, 255, 0.2);
-            color: #fff;
+            padding: 12px 30px;
+            border: 2px solid #00ffe1;
+            border-radius: 25px;
+            background: transparent;
+            color: #00ffe1;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 255, 225, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn:hover {
-            background: rgba(0, 255, 255, 0.4);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 40px rgba(0, 255, 255, 0.4),
+                inset 0 0 10px rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
 
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer with glow effect */
         footer {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px;
             text-align: center;
             color: #fff;
             margin-top: 30px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
         }
 
-        footer div {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+        footer div:first-child {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #00ffe1;
+            text-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
         }
 
         footer a {
             color: #FFFFFF;
             text-decoration: none;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
         footer a:hover {
             color: #00ffe1;
+            text-shadow: 0 0 20px #00ffe1;
+            transform: translateY(-5px) scale(1.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            p { font-size: 1rem; }
+            .profile-pic { width: 140px; height: 140px; }
+            .hero { margin: 20px; padding: 40px 15px 15px 15px; }
+            .orbit { width: 400px; height: 400px; }
         }
     </style>
 </head>
@@ -142,6 +331,8 @@
 <body>
 <div class="background">
     <div class="line-flow"></div>
+    <div class="orbit"></div>
+    <div class="stars" id="stars"></div>
 </div>
 
 <div class="hero">
@@ -149,17 +340,16 @@
     <h1>Welcome to TechBytes with Havish</h1>
     <p>Explore the latest in Raspberry Pi, Arduino, IoT, AI, and Machine Learning!</p>
     <div class="buttons">
-        <a href="blog.html"><button class="btn">Blog</button></a>
-        <a href="./video.html"><button class="btn">IntelliBlog</button></a>
-        <a href="./projects.html"><button class="btn">Projects</button></a>
-        <!-- 🔐 Login Button moved here -->
-        <a href="login.html"><button class="btn">Login</button></a>
+        <a href="blog.html"><button class="btn"><span>Blog</span></button></a>
+        <a href="./video.html"><button class="btn"><span>IntelliBlog</span></button></a>
+        <a href="./projects.html"><button class="btn"><span>Projects</span></button></a>
+        <a href="login.html"><button class="btn"><span>Login</span></button></a>
     </div>
 </div>
 
 <footer>
     <div>Follow me on</div>
-    <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
+    <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem; flex-wrap: wrap;">
         <a href="https://x.com/havish_vivek" target="_blank"><i class="fab fa-twitter"></i></a>
         <a href="https://www.instagram.com/havishvivek/" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.youtube.com/@HavishStudio" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -167,6 +357,41 @@
         <a href="https://discord.gg/2DzBtVqDue" target="_blank"><i class="fab fa-discord"></i></a>
     </div>
 </footer>
+
+<script>
+// Create animated stars
+const starsContainer = document.getElementById('stars');
+const numberOfStars = 100;
+
+for (let i = 0; i < numberOfStars; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    
+    // Random size
+    const size = Math.random() * 3 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    
+    // Random position
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    
+    // Random animation duration and delay
+    star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    
+    starsContainer.appendChild(star);
+}
+
+// Add parallax effect on mouse move
+document.addEventListener('mousemove', (e) => {
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+    
+    document.querySelector('.orbit').style.transform = 
+        `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) rotate(${moveX}deg)`;
+});
+</script>
 
 </body>
 </html>
