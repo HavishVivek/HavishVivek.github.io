@@ -4,4 +4,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   base: '/HavishVivek.github.io/',
+  build: {
+    outDir: 'docs'
+  }
 })
